@@ -5,7 +5,6 @@ from django.forms.utils import ErrorList
 from django.http import HttpResponse, HttpResponseRedirect, request
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.decorators import login_required
-from blogApp.models import Post, Categories, PostComment
 from app import models
 from app.models import Profile
 from django.contrib import messages

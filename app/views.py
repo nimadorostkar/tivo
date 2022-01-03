@@ -4,8 +4,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import Profile, Item, Slider, ItemImage, Area, Fav, Contact
-from blogApp.models import Post, Categories, PostComment
+from .models import Profile,Contact
 from .forms import ProfileForm, UserForm, ContactForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
@@ -22,20 +21,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 #------------------------------------------------------------------------------
 def index(request):
-    img = models.Slider.objects.all()
-    item_img = models.ItemImage.objects.all()
-    items = models.Item.objects.filter(available=True).order_by("-date")[:11]
-    all_items_count = models.Item.objects.filter(available=True).count()
-    all_area_count = models.Area.objects.all().count()
-    areas = models.Area.objects.all()
-    fav = models.Fav.objects.all()
-    context = {'img':img,
-    'items':items,
-    'item_img':item_img,
-    'areas':areas,
-    'fav':fav,
-    'all_items_count':all_items_count,
-    'all_area_count':all_area_count}
+    context = {}
     return render(request, 'index.html', context)
 
 

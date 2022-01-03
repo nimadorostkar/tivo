@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from app import views
-from .views import items, profile, contact, search, favs, items_detail
+from .views import profile, contact 
 
 app_name='app'
 

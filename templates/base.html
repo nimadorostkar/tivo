@@ -1,6 +1,4 @@
 {% load static %}
-{% load bootstrap %}
-
 
 
 <!DOCTYPE html>
@@ -10,117 +8,106 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>
-      {{ settings.title }}  {% block title %}{% endblock %}
+      ggggg ggg  {% block title %}{% endblock %}
   </title>
   <meta name="description" content="{{ settings.introduction_text }}">
   <meta name="author" content="Nima Dorostkar">
   <meta name="keyword" content="real estate, atrotech, amlak.app , nima dorostkar, {{ settings.title }} ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+  <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+  <meta property="og:site_name" content="" /> <!-- website name -->
+  <meta property="og:site" content="" /> <!-- website link -->
+  <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+  <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+  <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+  <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+  <meta property="og:type" content="article" />
 
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/fontello.css">
-  <link href="{% static 'assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/fonts/icon-7-stroke/css/helper.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet" media="screen">
-  <link rel="stylesheet" href="{% static 'assets/css/bootstrap-select.min.css' %}">
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/icheck.min_all.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/price-range.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/owl.theme.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/owl.transitions.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+  <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet">
+  <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+  <link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+  <!-- Favicon  -->
+  <link rel="icon" href="{% static 'images/favicon.png' %}">
 
 
     <!-- Specific CSS goes HERE -->
     {% block stylesheets %}{% endblock stylesheets %}
 
-</head>
-<body>
 
 
-  <div id="preloader">
-  		<div id="status">&nbsp;</div>
-  </div>
-  <!-- Body content -->
+  </head>
+  <body data-spy="scroll" data-target=".fixed-top">
+
+      <!-- Preloader -->
+  	<div class="spinner-wrapper">
+          <div class="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+          </div>
+      </div>
+      <!-- end of preloader -->
 
 
-  <div class="header-connect">
-  		<div class="container">
-  				<div class="row">
-  						<div class="col-md-5 col-sm-8  col-xs-12">
-  								<div class="header-half header-call">
-  										<p>
-  												<span> <i class="fa fa-phone"></i> <a href="tel:{{ settings.phone1 }}"> {{ settings.phone1 }} </a> </span>
-                          <span> <i class="fa fa-phone"></i> <a href="tel:{{ settings.phone2 }}"> {{ settings.phone2 }} </a> </span>
-  										</p>
-  								</div>
-  						</div>
-  						<div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-  								<div class="header-half header-social">
-  										<ul class="list-inline">
-                          <li><a href="{{ settings.instagram }}"><i class="fa fa-instagram" style="font-size:20px"></i></a></li>
-                          <li><a href="{{ settings.telegram }}"><i class="fa fa-telegram" style="font-size:20px"></i></a></li>
-  												<li><a href="{{ settings.twitter }}"><i class="fa fa-twitter" style="font-size:20px"></i></a></li>
-  												<li><a href="{{ settings.whatsapp }}"><i class="fa fa-whatsapp" style="font-size:20px"></i></a></li>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+          <div class="container">
 
-  										</ul>
-  								</div>
-  						</div>
-  				</div>
-  		</div>
-  </div>
-  <!--End top header -->
+              <!-- Text Logo - Use this if you don't have a graphic logo -->
+              <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
 
-  <nav class="navbar navbar-default ">
-  		<div class="container">
-  				<!-- Brand and toggle get grouped for better mobile display -->
-  				<div class="navbar-header">
-  						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-  								<span class="sr-only">Toggle navigation</span>
-  								<span class="icon-bar"></span>
-  								<span class="icon-bar"></span>
-  								<span class="icon-bar"></span>
-  						</button>
-  						<a class="navbar-brand" href="{% url 'app:home' %}"><img src="{{ settings.logo.url }}" style="max-height:50px;" alt="{{ settings.title }}"></a>
-  				</div>
+              <!-- Image Logo -->
+              <a class="navbar-brand logo-image" href="index.html"><img src="{% static 'images/logo.svg' %}" alt="alternative"></a>
 
-  				<!-- Collect the nav links, forms, and other content for toggling -->
-  				<div class="collapse navbar-collapse yamm" id="navigation">
-  						<div class="button navbar-right">
-                {% if user.is_authenticated %}
-                <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.location.replace('{% url 'logout' %}')" data-wow-delay="0.5s"> خروج </button>
-                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'app:profile' %}')" data-wow-delay="0.5s"> پروفایل </button>
-                {% else %}
-                <button class="navbar-btn nav-button wow bounceInRight" onclick="window.location.replace('{% url 'register' %}')" data-wow-delay="0.4s"> ثبت نام </button>
-                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'login' %}')" data-wow-delay="0.5s"> ورود </button>
-                {% endif %}
-  						</div>
-  						<ul class="main-nav nav navbar-nav navbar-right">
-  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:home' %}"> صفحه اصلی </a> </li>
-  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:items' %}"> جستجوی املاک </a></li>
-  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/blog"> وبلاگ و اخبار  </a></li>
-  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:favs' %}"> مورد علاقه ها  </a></li>
-  								<li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'app:contact' %}"> تماس با ما </a></li>
-                  {% if userProfile.user_type == 'کارشناس' or userProfile.user_type == 'مدیر' %}
-                   <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'crm' %}"> <i class="fa fa-dashboard" style="font-size:18px"></i> پنل کارشناس </a></li>
-                  {% endif %}
-  						</ul>
-  				</div><!-- /.navbar-collapse -->
-  		</div><!-- /.container-fluid -->
-  </nav>
-  <!-- End of nav bar -->
+              <!-- Mobile Menu Toggle Button -->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-awesome fas fa-bars"></span>
+                  <span class="navbar-toggler-awesome fas fa-times"></span>
+              </button>
+              <!-- end of mobile menu toggle button -->
 
+              <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                          <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link page-scroll" href="#features">FEATURES</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link page-scroll" href="#details">DETAILS</a>
+                      </li>
 
+                      <!-- Dropdown Menu -->
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle page-scroll" href="#video" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">VIDEO</a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="article-details.html"><span class="item-text">ARTICLE DETAILS</span></a>
+                              <div class="dropdown-items-divide-hr"></div>
+                              <a class="dropdown-item" href="terms-conditions.html"><span class="item-text">TERMS CONDITIONS</span></a>
+                              <div class="dropdown-items-divide-hr"></div>
+                              <a class="dropdown-item" href="privacy-policy.html"><span class="item-text">PRIVACY POLICY</span></a>
+                          </div>
+                      </li>
+                      <!-- end of dropdown menu -->
+
+                      <li class="nav-item">
+                          <a class="nav-link page-scroll" href="#pricing">PRICING</a>
+                      </li>
+                  </ul>
+                  <span class="nav-item">
+                      <a class="btn-outline-sm" href="log-in.html">LOG IN</a>
+                  </span>
+              </div>
+          </div> <!-- end of container -->
+      </nav> <!-- end of navbar -->
+      <!-- end of navigation -->
 
 
 {% block content %}{% endblock content %}
@@ -130,131 +117,77 @@
 
 
 
-    	<!-- Footer area-->
-    <div class="footer-area">
-
-    		<div class=" footer">
-    				<div class="container">
-    						<div class="row" align="right">
-
-    								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
-    										<div class="single-footer">
-    												<h4> درباره ما </h4>
-    												<div class="footer-title-line"></div>
-    												<img src="{{ settings.logo.url }}" alt="{{ settings.title }}" class="wow pulse" data-wow-delay="1s">
-    												<p dir="rtl"> {{ settings.title_below }} </p>
-    										</div>
-    								</div>
-    								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
-    										<div class="single-footer">
-    												<h4> پیوندها  </h4>
-    												<div class="footer-title-line"></div>
-    												<ul class="footer-menu" dir="rtl" align="center">
-    														<li><a href="{% url 'app:items' %}"> جستجو املاک </a></li>
-    														<li><a href="/blog"> وبلاگ و اخبار </a></li>
-    														<li><a href="{% url 'app:favs' %}"> مورد علاقه ها </a></li>
-    														<li><a href="{% url 'app:contact' %}">  تماس با ما  </a></li>
-    														<li><a href="{% url 'app:profile' %}"> پروفایل </a>  </li>
-                                <button class="navbar-btn nav-button wow bounceInRight login" onclick="window.location.replace('{% url 'register' %}')" data-wow-delay="0.4s"> ثبت نام </button>
-                                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'login' %}')" data-wow-delay="0.5s"> ورود </button>
-    												</ul>
-    										</div>
-    								</div>
-    								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
-    										<div class="single-footer">
-    												<h4> آخرین اخبار </h4>
-    												<div class="footer-title-line"></div>
-    												<ul class="footer-blog">
-
-                            {% for post in footer_latestpost_list %}
-    														<li dir="rtl">
-    																<div class="col-md-3 blg-thumb p0">
-    																		<a href="{% url 'blog-detail' post.slug %}"> <img src="{{post.img.url}}"> </a>
-    																</div>
-    																<div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-    																		<h6> <a href="{% url 'blog-detail' post.slug %}"> {{ post.title | slice:':20' | safe}}... </a></h6>
-    																		{{post.body | slice:':65' | safe}}...
-    																</div>
-    														</li> <br>
-                            {% endfor %}
+    <!-- Footer -->
+    <svg class="footer-frame" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 79"><defs><style>.cls-2{fill:#5f4def;}</style></defs><title>footer-frame</title><path class="cls-2" d="M0,72.427C143,12.138,255.5,4.577,328.644,7.943c147.721,6.8,183.881,60.242,320.83,53.737,143-6.793,167.826-68.128,293-60.9,109.095,6.3,115.68,54.364,225.251,57.319,113.58,3.064,138.8-47.711,251.189-41.8,104.012,5.474,109.713,50.4,197.369,46.572,89.549-3.91,124.375-52.563,227.622-50.155A338.646,338.646,0,0,1,1920,23.467V79.75H0V72.427Z" transform="translate(0 -0.188)"/></svg>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-col first">
+                        <h4>About Tivo</h4>
+                        <p class="p-small">We're passionate about designing and developing one of the best marketing apps in the market</p>
+                    </div>
+                </div> <!-- end of col -->
+                <div class="col-md-4">
+                    <div class="footer-col middle">
+                        <h4>Important Links</h4>
+                        <ul class="list-unstyled li-space-lg p-small">
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body">Our business partners <a class="white" href="#your-link">startupguide.com</a></div>
+                            </li>
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body">Read our <a class="white" href="terms-conditions.html">Terms & Conditions</a>, <a class="white" href="privacy-policy.html">Privacy Policy</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> <!-- end of col -->
+                <div class="col-md-4">
+                    <div class="footer-col last">
+                        <h4>Contact</h4>
+                        <ul class="list-unstyled li-space-lg p-small">
+                            <li class="media">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="media-body">22 Innovative, San Francisco, CA 94043, US</div>
+                            </li>
+                            <li class="media">
+                                <i class="fas fa-envelope"></i>
+                                <div class="media-body"><a class="white" href="mailto:contact@tivo.com">contact@tivo.com</a> <i class="fas fa-globe"></i><a class="white" href="#your-link">www.tivo.com</a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of footer -->
+    <!-- end of footer -->
 
 
-    												</ul>
-    										</div>
-    								</div>
-    								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
-    										<div class="single-footer news-letter">
-    												<h4> در ارتباط باشید </h4>
-    												<div class="footer-title-line"></div>
-                            <ul class="footer-adress" dir="rtl">
-                                <li> <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> {{ settings.phone1 }} </a> </li>
-                                <li> <a href="tel:{{ settings.phone2 }}"> <i class="fa fa-phone"></i> {{ settings.phone2 }} </a> </li>
-                                <li> <a href="mailto:{{ settings.email }}"> <i class="fa fa-envelope"> </i> {{ settings.email }} </a> </li>
-                                <li> <i class="fa fa-map-marker"> </i> {{ settings.address }} </li>
-                            </ul>
-                            <br>
-    												<div class="social pull-right">
-    														<ul>
-    																<li><a class="wow fadeInUp animated" href="{{ settings.whatsapp }}"><i class="fa fa-whatsapp"></i></a></li>
-    																<li><a class="wow fadeInUp animated" href="{{ settings.instagram }}" data-wow-delay="0.3s"><i class="fa fa-instagram"></i></a></li>
-    																<li><a class="wow fadeInUp animated" href="{{ settings.telegram }}" data-wow-delay="0.4s"><i class="fa fa-telegram"></i></a></li>
-    																<li><a class="wow fadeInUp animated" href="{{ settings.twitter }}" data-wow-delay="0.5s"><i class="fa fa-twitter"></i></a></li>
-    														</ul>
-    												</div>
-    										</div>
-    								</div>
-
-    						</div>
-    				</div>
-    		</div>
-
-    		<div class="footer-copy text-center">
-    				<div class="container">
-    						<div class="row">
-    								<div class="pull-left">
-    										<span> &#169; <a href="http://www.Atrotech.ir">Atrotech</a> , All rights reserved </span>
-    								</div>
-    								<div class="bottom-menu pull-right">
-    										<ul>
-    												<li><a class="wow fadeInUp animated" href="{% url 'app:home' %}" data-wow-delay="0.2s">Home</a></li>
-    												<li><a class="wow fadeInUp animated" href="/blog" data-wow-delay="0.4s">Blog</a></li>
-    												<li><a class="wow fadeInUp animated" href="{% url 'app:contact' %}" data-wow-delay="0.6s">Contact</a></li>
-    										</ul>
-    								</div>
-    						</div>
-    				</div>
-    		</div>
-
-    </div>
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Template by Inovatik</a><br>
+                        Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                    </p>
+                </div> <!-- end of col -->
+            </div> <!-- enf of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of copyright -->
+    <!-- end of copyright -->
 
 
-
-
-
-
-
-
-    <script src="{% static 'assets/js/modernizr-2.6.2.min.js' %}"></script>
-
-    <script src="{% static 'assets/js/jquery-1.10.2.min.js' %}"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap-select.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap-hover-dropdown.js' %}"></script>
-
-    <script src="{% static 'assets/js/easypiechart.min.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.easypiechart.min.js' %}"></script>
-
-    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'assets/js/wow.js' %}"></script>
-
-    <script src="{% static 'assets/js/icheck.min.js' %}"></script>
-    <script src="{% static 'assets/js/price-range.js' %}"></script>
-
-    <script src="{% static 'assets/js/main.js' %}"></script>
-
-
-    <!-- Specific Page JS goes HERE  -->
-    {% block javascripts %}{% endblock javascripts %}
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.min.js' %}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="{% static 'js/validator.min.js' %}"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="{% static 'js/scripts.js' %}"></script> <!-- Custom scripts -->
 
 </body>
 </html>

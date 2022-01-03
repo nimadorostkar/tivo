@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     'authentication',
     'django.contrib.humanize',
     'import_export',
-    'bootstrapform',
     'jalali_date',
     'app'
 ]
@@ -65,10 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                'app.context_processor.settings',
-                'crm.context_processor.notification',
-                'crm.context_processor.accessType'
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
