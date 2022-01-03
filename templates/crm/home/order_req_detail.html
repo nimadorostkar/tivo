@@ -1,0 +1,229 @@
+{% extends 'crm/layouts/base.html' %}
+{% load humanize %}
+{% load jalali_tags %}
+
+{% block title %} {{ req }} {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+  <link rel="stylesheet" href="/static/admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css">
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+<br>
+
+<div class="container-fluid py-4">
+
+  <div class="row">
+    <div class="col-lg-12 mb-lg-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="d-flex flex-column h-100">
+                <p>  <small>{{req.date_created|date:'Y-m-d'}}</small> <i class="far fa-calendar-alt me-2"></i>    <small>{{req.date_created|date:'H-i'}}</small> <i class="far fa-clock me-2"></i> </p>
+                <h4 dir="rtl" class="font-weight-bolder">
+                  {{ req }}
+                  <span class="text-xs px-3 mb-0 text-secondary">
+                    {% if req.status == 'تکمیل شده' %}
+                       <span class="badge badge-sm bg-gradient-success"> تکمیل شده </span>
+                    {% elif req.status == 'لغو شده' %}
+                       <span class="badge badge-sm bg-gradient-danger"> لغو شده </span>
+                    {% elif req.status == 'دریافت پیش پرداخت' %}
+                       <span class="badge badge-sm bg-gradient-info"> دریافت پیش پرداخت </span>
+                    {% elif req.status == 'جدید' %}
+                       <span class="badge badge-sm bg-gradient-warning"> جدید </span>
+                    {% else %}
+                       <span class="badge badge-sm bg-gradient-secondary"> در حال بررسی </span>
+                    {% endif %}
+                   </span>
+                </h4>
+                <div align="right" dir="rtl">
+                  {{ req.description|linebreaks }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12"> <br>
+
+              <div class="table-responsive p-0" dir="rtl">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> فایل </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> خریدار </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> مالک </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> بیعانه </th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> قیمت نهای </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="align-middle text-center">
+                        <a href="{{ req.item.get_absolute_crm_url }}">
+                         <p class="text-xs mb-0"> <img src="{{ req.item.image.url }}" class="avatar avatar-sm me-3"> {{ req.item }} <small> ({{ req.item.code }}) </small> </p>
+                        </a>
+                      </td>
+                      <td class="align-middle text-center">
+                          <a href="{{ req.customer.get_absolute_url }}">
+                            <p class="mb-0">
+                              <img src="{{ req.customer.user_photo.url }}" class="avatar avatar-sm me-3">
+                              {{ req.customer.user.first_name }} {{ req.customer.user.last_name }}
+                              {% if req.customer.user_type == 'کاربر ویژه' %}
+                                 <img src="/static/assets/crm/img/star.png" width="20px" class="me-2">
+                              {% endif %}
+                           </p>
+                           <p class="text-xxs text-secondary mb-0"> {{ req.customer.phone }} </p>
+                         </a>
+                      </td>
+                      <td class="align-middle text-center">
+                         <p class="mb-0">  <img src="/static/assets/crm/img/user.png" width="20px" height="20px"> {{ req.item.ownership  }} </p>
+                         <p class="text-xxs text-secondary mb-0"> {{ req.item.ownership.phone }} </p>
+                      </td>
+                      <td class="align-middle text-center">
+                         <p class="text-xs mb-0"> {{ req.prepayment  }} </p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-xs mb-0"> {{ req.final_price  }} </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br><br>
+
+                <div class="row">
+                  <div class="col-lg-6" dir="rtl" align="right">
+                   <h6>
+                     <span class="text-xxs text-secondary">  کارشناس فروش : </span>
+                     <img src="{{ req.user.user.profile.user_photo.url }}" width="30px" height="30px"> {{ req.user.user.first_name }} {{ req.user.user.last_name }}
+                   </h6>
+
+                  </div>
+                  <div class="col-lg-6" align="left">
+                    <a class="badge badge-sm bg-gradient-info  btn btn-link text-dark mb-0 bg-gradient text-xxs" href="{{ req.get_absolute_edit_url }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i> ویرایش </a>
+                     <p class="text-xxs text-secondary" dir="rtl"> {{ req.date_updated|date:'Y-m-d' }} , {{ req.date_updated|date:'H-i' }} </p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+    <div class="container-fluid py-4">
+
+     <br>
+
+    <div class="row" dir="rtl">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header pb-0 p-3">
+            <h6 class="mb-1"> اقدامات و پیگیری ها </h6>
+            <p class="text-sm"> اقدامات و پیگیری های انجام شده برای {{ req }}</p>
+          </div>
+          <div class="card-body p-3">
+            <div class="row">
+
+              {% for Order_incomings in incomings %}
+                <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
+                  <div class="card h-100 card-plain border">
+                    <div class="card-body d-flex flex-column justify-content-center text-center">
+                      <div class="row">
+                        <div class="col-lg-6" dir="rtl" align="right">
+                          <i class="fa fa-check text-info" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-lg-6" align="left">
+                          <p class="text-xxs text-secondary" dir="rtl"> <i class="far fa-clock me-2 btn-outline-info"></i> {{ Order_incomings.date_created|date:"H:i"}} <i class="far fa-calendar-alt me-2 btn-outline-info"></i> {{ Order_incomings.date_created|date:'Y-m-d' }}   </p>
+                        </div>
+                      </div>
+                      <br>
+                      <h6 align="right" class="text-secondary"> {{ Order_incomings.description|linebreaks }}  </h6>
+                      <div class="row">
+                        <div class="col-lg-6" dir="rtl" align="right">
+                          <p class="text-xxs text-secondary" dir="rtl"> <img src="{{ Order_incomings.user.user_photo.url }}" width="15px" height="15px"> {{ Order_incomings.user.user.first_name }} {{ Order_incomings.user.user.last_name }}  </p>
+                        </div>
+                        <div class="col-lg-6" align="left">
+                          <form action="{% url 'incoming_remove' %}" method="post">
+                             {% csrf_token %}
+                             <input name="reqId" type="hidden" value="{{ req.id }}">
+                             <input name="incomId" type="hidden" value="{{ Order_incomings.id }}">
+                             <button type="submit" class="text-xxs btn bg-gradient-danger"> حذف </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+               {% endfor %}
+
+
+
+
+
+              <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
+                <div class="card h-100 card-plain border">
+                  <div class="card-body d-flex flex-column justify-content-center text-center">
+
+                    <form action="#" method="post" dir="rtl" align="right">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <textarea name="description" rows="2" cols="50" placeholder="توضیحات..." class="form-control" required></textarea>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            {% for field in timeform %} {{ field }} {% endfor %}
+                          </div>
+                          <p class="text-xxs text-secondary" dir="rtl"> فرمت صحیح تاریخ: 00-00-1400 و زمان: 00:00  </p>
+                        </div>
+
+                      </div>
+                      <div align="center">
+                        <button type="submit" class="btn bg-gradient-info my-1 me-1"> افزودن پیگیری جدید </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+      {% include "crm/includes/footer.html" %}
+
+    </div>
+
+
+
+{% endblock content %}
+
+
+
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script src="/static/admin/js/django_jalali.min.js"></script>
+
+{% endblock javascripts %}

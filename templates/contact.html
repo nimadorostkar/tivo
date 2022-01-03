@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} contact {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+        <div style="background:#494C53 url({{ settings.header_image.url }}) no-repeat scroll center top / cover; color:#FFF; position: relative; min-height: 140px; ">
+            <div class="container">
+                <div class="row" dir="rtl">
+                    <div class="page-head-content">
+                        <h1 class="page-title"> تماس با ما </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End page header -->
+
+
+
+
+
+
+
+        <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row" dir="rtl" align="center">
+
+                    <div class="blog-lst col-md-12 pl0">
+                      <section class="post">
+                          <div class="text-center padding-b-50">
+                              <h2 class="wow fadeInLeft animated" dir="rtl"> {{ settings.title }} </h2>
+                              <div class="title-line wow fadeInRight animated"></div>
+                          </div>
+                            <hr><br>
+                            <p> {{ settings.contact_page_text }} </p>
+                      </section>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- property area -->
+        <div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
+            <div class="container" dir="rtl" align="center">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="" id="contact1">
+                          <div class="row">
+                              <div class="col-sm-4">
+                                  <h3><i class="fa fa-map-marker"></i> آدرس </h3>
+                                   <br> <p> {{ settings.address }} </p>
+                              </div>
+                              <!-- /.col-sm-4 -->
+                              <div class="col-sm-4">
+                                  <h3><i class="fa fa-phone"></i> تماس تلفنی </h3>
+                                  <br>
+                                  <p>
+                                     <a href="tel:{{ settings.phone1 }}"> <i class="pe-7s-call"></i> {{ settings.phone1 }}</a>
+                                     <br>
+                                     <a href="tel:{{ settings.phone2 }}"> <i class="pe-7s-call"></i> {{ settings.phone2 }} </a>
+                                  </p>
+                              </div>
+                              <!-- /.col-sm-4 -->
+                              <div class="col-sm-4">
+                                  <h3><i class="fa fa-envelope"></i> پشتیبانی الکترونیکی </h3>
+                                  <br>
+                                  <p> <a href="mailto:{{ settings.email }}"> {{ settings.email }}</a> </p>
+
+                              </div>
+                              <!-- /.col-sm-4 -->
+                          </div>
+                          <!-- /.row -->
+
+
+                            <hr>
+                              <iframe
+                               width="700"
+                               height="350"
+                               frameborder="0"
+                               scrolling="yes"
+                               marginheight="0"
+                               marginwidth="0"
+                               src="https://maps.google.com/maps?q={{ settings.lat_long }}&hl=es&z=14&amp;output=embed">
+                              </iframe>
+                            <hr>
+
+
+
+
+
+                            <h2> فرم تماس </h2> <hr>
+                            <form method="post" dir="rtl">
+                              {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">شماره تماس</label>
+                                            <input name="phone" type="text" class="form-control" id="phone">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name">نام</label>
+                                            <input name="name" type="text" class="form-control" id="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="body"> متن پیام </label>
+                                            <textarea name="body" id="body" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> ارسال پیام </button>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

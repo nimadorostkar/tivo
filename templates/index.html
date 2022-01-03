@@ -1,0 +1,444 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+<div class="slider-area">
+    <div class="slider">
+        <div id="bg-slider" class="owl-carousel owl-theme">
+           {% for Slider in img %}
+             <div class="item"><img src="{{ Slider.Image.url }}"></div>
+           {% endfor %}
+        </div>
+    </div>
+    <div class="slider-content">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+                <h2> {{ settings.title }} </h2>
+                <p> {{ settings.title_below }} </p>
+                <div class="search-form wow pulse" data-wow-delay="0.8s">
+
+                    <form action="{% url 'app:search' %}" method="post" class="form-inline">
+                    {% csrf_token %}
+                        <button class="btn  toggle-btn" type="button"><i class="fa fa-bars"></i></button>
+
+                        <div class="form-group">
+                          <select name="estate_status" id="basic" class="selectpicker show-tick form-control" title="نوع ملک">
+                              <option>آپارتمان</option>
+                              <option>خانه ویلایی</option>
+                              <option>زمین</option>
+                              <option>مغازه و تجاری</option>
+                              <option>دفتر کار اداری</option>
+                              <option>کلنگی</option>
+                              <option>ویلا</option>
+                              <option>باغ</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="area" id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="منطقه">
+                              {% for Area in areas %}
+                                <option data-tokens="{{Area}}"> {{ Area }} </option>
+                              {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="buy_status" id="basic" class="selectpicker show-tick form-control" title="نوع معامله">
+                                <option>رهن و اجاره</option>
+                                <option>رهن کامل</option>
+                                <option>فروش</option>
+                                <option>پیش فروش</option>
+                            </select>
+                        </div>
+                        <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
+
+                        <div style="display: none;" class="search-toggle">
+
+                            <div class="search-row">
+                                <div class="form-group mar-r-20">
+                                    <label for="price-range" dir="rtl" align="center"> اجاره: </label>
+                                    <input name="rent" type="text" class="span2" value="0,100000000" data-slider-min="0" data-slider-max="100000000" data-slider-step="100" data-slider-value="[0,100000000]" id="price-range"> <br>
+                                    <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                    <b dir="rtl" class="pull-right color"> ۱۰۰ میلیون تومان </b>
+                                </div>
+                                <div class="form-group mar-l-20">
+                                    <label for="property-geo" dir="rtl" align="center"> رهن: </label>
+                                    <input name="mortgage" type="text" class="span2" value="0,10000000000" data-slider-min="0" data-slider-max="10000000000" data-slider-step="500" data-slider-value="[0,10000000000]" id="property-geo"> <br>
+                                    <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                    <b dir="rtl" class="pull-right color"> ۱۰ میلیارد تومان </b>
+                                </div>
+                            </div>
+                            <div class="search-row">
+                                <div class="form-group mar-r-20">
+                                  <label for="min-baths" dir="rtl" align="center"> فروش: </label>
+                                  <input name="price" type="text" class="span2" value="0,100000000000" data-slider-min="0" data-slider-max="100000000000" data-slider-step="1000" data-slider-value="[0,100000000000]" id="min-baths"> <br>
+                                  <b dir="rtl" class="pull-left color"> ۰ تومان</b>
+                                  <b dir="rtl" class="pull-right color"> ۱۰۰ میلیارد تومان </b>
+                                </div>
+                                <div class="form-group mar-l-20">
+                                  <label for="min-bed" dir="rtl" align="center"> متراژ: </label>
+                                  <input name="area_size" type="text" class="span2" value="10,10000" data-slider-min="10" data-slider-max="10000" data-slider-step="10" data-slider-value="[10,10000]" id="min-bed"> <br>
+                                  <b dir="rtl" class="pull-left color"> ۱۰ متر </b>
+                                  <b dir="rtl" class="pull-right color"> ۱۰۰۰۰ متر </b>
+                                </div>
+                            </div>
+                            <hr>
+
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- property area -->
+<div class="content-area home-area-1 recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title" dir="rtl">
+                <!-- /.feature title -->
+                <h2> آخرین موارد اضافه شده </h2>
+                <p> تفاوتی نمی کند که قصد خرید، اجاره یا رهن کامل خانه را داشته باشید، ما اینجا هستیم تا با ارائه بهترین و هوشمندترین امکانات روز دنیا، شما را در این مسیر یاری دهیم. </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="proerty-th">
+
+              {% for Item in items %}
+                <div class="col-sm-6 col-md-3 p0">
+                  <div class="box-two proerty-item">
+                      <div class="item-thumb">
+                          <a href="{{ Item.get_absolute_url }}" ><img src="{{ Item.image.url }}"></a>
+                      </div>
+
+                      <div class="item-entry overflow" dir="rtl">
+                          <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
+                          <div class="dot-hr"></div>
+
+                          <span class="proerty-price pull-right">
+                            {% if Item.buy_status == 'فروش' %}
+                             <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                             {% elif Item.buy_status == 'رهن کامل' %}
+                              <span class="proerty-price pull-right"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
+                              {% elif Item.buy_status == 'پیش فروش' %}
+                               <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                            {% elif Item.buy_status == 'رهن و اجاره' %}
+                              <small> <span class="proerty-price pull-right"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
+                            {% endif %}
+                          </span>
+                          <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
+                          <div class="property-icon">
+
+                              <!-- room qty -->
+                              {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+                              {% endif %}
+
+
+                              <!-- parking -->
+                              {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                  {% if Item.parking %}
+                                    <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                                  {% else %}
+                                    <img src="{% static 'assets/img/icon/cars.png' %}">
+                                  {% endif %}
+                              {% endif %}
+
+
+
+                              <!-- elevator -->
+                              {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" %}
+                                  {% if Item.elevator %}
+                                    <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                                  {% else %}
+                                    <img src="{% static 'assets/img/icon/elevator.png' %}">
+                                  {% endif %}
+                              {% endif %}
+
+
+
+
+                              <!-- storage room -->
+                              {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                  {% if Item.storage_room %}
+                                    <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                                  {% else %}
+                                    <img src="{% static 'assets/img/icon/warehouse.png' %}">
+                                  {% endif %}
+                              {% endif %}
+
+
+
+                              <!-- balcony -->
+                              {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                  {% if Item.balcony %}
+                                    <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                                  {% else %}
+                                    <img src="{% static 'assets/img/icon/balcony.png' %}">
+                                  {% endif %}
+                              {% endif %}
+
+
+                              <span class="pull-left"> {{ Item.area_size }} متر  </span>
+
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                {% endfor %}
+
+
+
+                <div class="col-sm-6 col-md-3 p0">
+                    <div class="box-tree more-proerty text-center">
+                        <div class="item-tree-icon">
+                            <i class="fa fa-th"></i>
+                        </div>
+                        <div class="more-entry overflow">
+                            <h5><a href="{% url 'app:items' %}" > نمیتونی تصمیم بگیری؟ </a></h5>
+                            <h5 class="tree-sub-ttl"><a href="{% url 'app:items' %}" >  نمایش تمام آیتم ها </a> </h5>
+                            <button class="btn border-btn more-black" value="All properties" onclick="window.location.replace('{% url 'app:items' %}')" > تمام آیتم ها </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- boy-sale area -->
+<div class="boy-sale-area">
+    <div class="container" dir="rtl">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-10 col-sm-offset-1 col-md-offset-0 col-xs-12">
+              <a href="{% url 'app:items' %}">
+                <div class="asks-first">
+                    <div class="asks-first-circle">
+                        <span class="fa fa-search"></span>
+                    </div>
+                    <div class="asks-first-info">
+                        <h2 class="asks-call"> دنبال چه چیزی هستید ؟ </h2>
+                        <p class="asks-call"> ما به شما کمک می‌کنیم تا از بین هزاران ملک مسکونی، اداری، تجاری، از متراژ کم تا ویلایی و پنت هاوس ملک متناسب با بودجه و محله مورد نظرتان را جهت خرید پیدا کنید... </p>
+                    </div>
+                    <div class="asks-first-arrow">
+                        <a href="{% url 'app:items' %}"><span class="fa fa-angle-right"></span></a>
+                    </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-xs-12">
+                <p class="asks-call"> {{ settings.introduction_text }} </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Count area -->
+<div class="count-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                <!-- /.feature title -->
+                <h2> شما می توانید به ما اعتماد کنید  </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-6">
+                        <div class="count-item">
+                            <div class="count-item-circle">
+                                <span class="fa fa-users"></span>
+                            </div>
+                            <div class="chart">
+                                <h2 class="percent"> {{ settings.experts_number }} </h2>
+                                <h5>تعداد کارشناسان</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <div class="count-item">
+                            <div class="count-item-circle">
+                                <span class="fa fa-home"></span>
+                            </div>
+                            <div class="chart">
+                                <h2 class="percent">{{all_items_count}}</h2>
+                                <h5>کل آیتم های موجود</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-6">
+                        <div class="count-item">
+                            <div class="count-item-circle">
+                                <span class="fa fa-flag"></span>
+                            </div>
+                            <div class="chart">
+                                <h2 class="percent">{{all_area_count}}</h2>
+                                <h5>مناطق تحت پوشش</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--TESTIMONIALS -->
+<div class="testimonial-area recent-property" style="background-color: #FCFCFC; padding-bottom: 15px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                <!-- /.feature title -->
+                <h2> آخرین پست ها </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row testimonial">
+                <div class="col-md-12">
+                    <div id="testimonial-slider">
+
+                       {% for post in latestpost_list %}
+                        <div class="item">
+                            <div class="client-text" dir="rtl">
+                               <a href="{% url 'blog-detail' post.slug %}"> <h4> {{ post.title }} </h4> </a> <hr>
+                               <div align="center"><a href="{% url 'blog-detail' post.slug %}"> <img style="max-height:180px;" src="{{post.img.url}}"> </a></div>
+                                <p> {{post.body | slice:':200' | safe}}... </p>
+                                <h4 dir="ltr"><i> {{ post.j_post_date }} </i></h4>
+                            </div>
+                        </div>
+                       {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- property area -->
+<div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
+    <div class="container" dir="rtl" align="center">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="" id="contact1">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h3><i class="fa fa-map-marker"></i> آدرس </h3>
+                             <br> <p> {{ settings.address }} </p>
+                        </div>
+                        <!-- /.col-sm-4 -->
+                        <div class="col-sm-4">
+                            <h3><i class="fa fa-phone"></i> تماس تلفنی </h3>
+                            <br>
+                            <p>
+                               <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> {{ settings.phone1 }} </a>
+                               <br>
+                               <a href="tel:{{ settings.phone2 }}"> <i class="fa fa-phone"></i> {{ settings.phone2 }} </a>
+                            </p>
+                        </div>
+                        <!-- /.col-sm-4 -->
+                        <div class="col-sm-4">
+                            <h3><i class="fa fa-envelope"></i> پشتیبانی الکترونیکی </h3>
+                            <br>
+                            <p> <a href="mailto:{{ settings.email }}"> {{ settings.email }} </a> </p>
+
+                        </div>
+                        <!-- /.col-sm-4 -->
+                    </div>
+                    <!-- /.row -->
+
+                    <h2> فرم تماس </h2> <hr>
+                    <form method="post" dir="rtl" action="{% url 'app:contact' %}">
+                      {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="phone">شماره تماس</label>
+                                    <input name="phone" type="text" class="form-control" id="phone">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">نام</label>
+                                    <input name="name" type="text" class="form-control" id="name">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="body"> متن پیام </label>
+                                    <textarea name="body" id="body" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> ارسال پیام </button>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+
+
+    $(function() {
+      $('.selectpicker').selectpicker({
+        liveSearch: true
+      });
+    });
+
+</script>
+
+{% endblock javascripts %}

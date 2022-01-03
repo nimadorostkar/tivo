@@ -1,0 +1,442 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load humanize %}
+{% load bootstrap %}
+{% load jalali_tags %}
+
+
+{% block title %} |{{ Item }} {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+ <link rel="stylesheet" href="{% static 'assets/css/lightslider.min.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+
+
+
+        <div style="background:#494C53 url({{ settings.header_image.url }}) no-repeat scroll center top / cover; color:#FFF; position: relative; min-height: 140px; ">
+            <div class="container">
+                <div class="row" dir="rtl">
+                    <div class="page-head-content">
+                        <h1 class="page-title"> {{ Item }} </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End page header -->
+
+        <!-- property area -->
+        <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
+            <div class="container">
+
+                <div class="clearfix padding-top-40" >
+
+                    <div class="col-md-8 single-property-content prp-style-2">
+                        <div class="">
+                            <div class="row">
+                                <div class="light-slide-item">
+                                    <div class="clearfix">
+
+                                          <div class="favorite-and-print">
+                                            {% if user.is_authenticated %}
+                                              <form action="" method="post">
+                                              {% csrf_token %}
+                                                {% if Item.id in item_fav %}
+                                                 <button type="submit"> <i class="fa fa-star" style="color:orange; font-size:25px;"></i> </button>
+                                                {% else %}
+                                                 <button type="submit"> <i class="fa fa-star" style="font-size:25px;"></i> </button>
+                                                {% endif %}
+                                              </form>
+                                              {% else %}
+                                                <p dir="rtl"> <i class="fa fa-star" style="font-size:15px;"></i>  برای ذخیره در لیست مورد علاقه ها لطفا <a href="{% url 'login' %}">وارد</a> شوید </p>
+                                              {% endif %}
+                                          </div>
+
+                                        <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+
+                                           {% for ItemImage in item_img %}
+                                             <li data-thumb="{{ ItemImage.Image.url }}">
+                                                 <img src="{{ ItemImage.Image.url }}"/>
+                                             </li>
+                                           {% endfor %}
+                                           <li data-thumb="{{ Item.image.url }}">
+                                               <img src="{{ Item.image.url }}"/>
+                                           </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-property-wrapper" dir="rtl">
+
+                                <div class="section">
+                                    <h4 class="s-property-title"> توضیحات </h4>
+                                    <div class="s-property-content">
+                                        <p> {{ Item.additional_information|linebreaks }} </p>
+                                    </div>
+                                </div>
+                                <!-- End description area  -->
+
+                                <div class="section additional-details">
+
+                                    <h4 class="s-property-title"> جزئیات تکمیلی </h4>
+
+                                    <ul class="additional-details-list clearfix">
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> کد </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.code }} </span>
+                                        </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> سن بنا </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.building_age }} </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> متراژ </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.area_size }} </span>
+                                        </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> منطقه </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.area }} </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title"> تاریخ آگهی </span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> {{ Item.date|to_jalali:'%Y/%m/%d'  }} </span>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                                <!-- End additional-details area  -->
+
+
+                                <div class="section property-video">
+                                    <h4 class="s-property-title"> ویدئو </h4>
+                                    <div class="video-thumb"  align="center">
+                                        <a class="video-popup" href="{{ Item.video_link }}" title="Virtual Tour">
+                                            <img src="{% static 'assets/img/video.png' %}" class="img-responsive wp-post-image" alt="Exterior">
+                                        </a>
+                                        <p> برای مشاهده ویدیو کلیک کنید </p>
+                                    </div>
+                                </div>
+                                <!-- End video area  -->
+
+                            </div>
+                        </div>
+
+                        <div class="similar-post-section padding-top-40">
+                          <h4 class="s-property-title" dir="rtl"> سایر موارد موجود در این منطقه </h4>
+                            <div id="prop-smlr-slide_0">
+
+                              {% for Item in similar_items %}
+                                <div class="box-two proerty-item">
+                                  <div class="box-two proerty-item">
+                                      <div class="item-thumb">
+                                          <a href="{{ Item.get_absolute_url }}" ><img src="{{ Item.image.url }}"></a>
+                                      </div>
+
+                                      <div class="item-entry overflow" dir="rtl">
+                                          <h6><a href="{{ Item.get_absolute_url }}"> {{ Item }} </a></h6>
+                                          <div class="dot-hr"></div>
+
+                                          <span class="proerty-price pull-right">
+                                              {% if Item.buy_status == 'فروش' %}
+                                                <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                                              {% elif Item.buy_status == 'رهن کامل' %}
+                                                <span class="proerty-price pull-right"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
+                                              {% elif Item.buy_status == 'پیش فروش' %}
+                                                <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                                              {% elif Item.buy_status == 'رهن و اجاره' %}
+                                                <small> <span class="proerty-price pull-right"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
+                                              {% endif %}
+                                          </span>
+                                          <p style="display: none;"> {{ Item.additional_information|slice:":120" }}...  </p>
+                                          <div class="property-icon">
+
+                                            <!-- room qty -->
+                                            {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                              <img src="{% static 'assets/img/icon/bed-orange.png' %}">[{{ Item.room_qty }}]
+                                            {% endif %}
+
+
+                                            <!-- parking -->
+                                            {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                                {% if Item.parking %}
+                                                  <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/cars.png' %}">
+                                                {% endif %}
+                                            {% endif %}
+
+
+
+                                            <!-- elevator -->
+                                            {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" %}
+                                                {% if Item.elevator %}
+                                                  <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/elevator.png' %}">
+                                                {% endif %}
+                                            {% endif %}
+
+
+
+
+                                            <!-- storage room -->
+                                            {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                                {% if Item.storage_room %}
+                                                  <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/warehouse.png' %}">
+                                                {% endif %}
+                                            {% endif %}
+
+
+
+                                            <!-- balcony -->
+                                            {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                                {% if Item.balcony %}
+                                                  <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                                                {% else %}
+                                                  <img src="{% static 'assets/img/icon/balcony.png' %}">
+                                                {% endif %}
+                                            {% endif %}
+
+
+                                              <span class="pull-left"> {{ Item.area_size }} متر  </span>
+
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 p0" dir="rtl">
+                        <aside class="sidebar sidebar-property blog-asside-right property-style2">
+                            <div class="dealer-widget">
+                                <div class="dealer-content">
+                                    <div class="inner-wrapper">
+                                        <div class="single-property-header">
+                                            <h1 class="property-title"> {{ Item }} </h1>
+                                            <span class="text-xxs"> کد: {{ Item.code  }} </span>
+                                            <span class="property-price">
+                                              {% if Item.buy_status == 'فروش' %}
+                                               <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                                              {% elif Item.buy_status == 'رهن کامل' %}
+                                               <span class="proerty-price pull-right"> {{ Item.deposit|floatformat:0|intcomma:False }} تومان </span>
+                                              {% elif Item.buy_status == 'پیش فروش' %}
+                                               <span class="proerty-price pull-right"> {{ Item.price|floatformat:0|intcomma:False }} تومان </span>
+                                              {% elif Item.buy_status == 'رهن و اجاره' %}
+                                               <small> <span class="proerty-price pull-right"> ودیعه:{{ Item.deposit|floatformat:0|intcomma:False }} اجاره:{{ Item.rent|floatformat:0|intcomma:False }} تومان</span> </small>
+                                              {% endif %}
+                                            </span>
+                                        </div>
+
+                                        <div class="property-meta entry-meta clearfix">
+
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-tag">
+                                                    <img src="{% static 'assets/img/icon/sale-orange.png' %}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label"> وضعیت </span>
+                                                    <span class="property-info-value"> {{ Item.buy_status }} </span>
+                                                </span>
+                                            </div>
+
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info icon-area">
+                                                    <img src="{% static 'assets/img/icon/room-orange.png' %}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label"> متراژ </span>
+                                                    <span class="property-info-value"> {{ Item.area_size }} <b class="property-info-unit">متر مربع</b></span>
+                                                </span>
+                                            </div>
+
+
+
+                                         <!-- room qty -->
+                                         {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-bed">
+                                                    <img src="{% static 'assets/img/icon/bed-orange.png' %}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label"> تعداد اتاق </span>
+                                                    <span class="property-info-value"> {{ Item.room_qty }} </span>
+                                                </span>
+                                            </div>
+                                          {% endif %}
+
+
+                                          <!-- parking -->
+                                          {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-bath">
+                                                    <img src="{% static 'assets/img/icon/cars-orange.png' %}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label"> پارکینگ </span>
+                                                    <span class="property-info-value">{% if Item.parking %} دارد {% else %} ندارد {% endif %}</span>
+                                                </span>
+                                            </div>
+                                          {% endif %}
+
+                                          <!-- elevator -->
+                                          {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" %}
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-bath">
+                                                    <img src="{% static 'assets/img/icon/elevator-orange.png' %}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label">آسانسور</span>
+                                                    <span class="property-info-value">{% if Item.elevator %} دارد {% else %} ندارد {% endif %} </span>
+                                                </span>
+                                            </div>
+                                          {% endif %}
+
+                                          <!-- storage room -->
+                                          {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-garage">
+                                                    <img src="{% static 'assets/img/icon/warehouse-orange.png' %}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label">انباری</span>
+                                                    <span class="property-info-value"> {% if Item.storage_room %} دارد {% else %} ندارد {% endif %}</span>
+                                                </span>
+                                            </div>
+                                          {% endif %}
+
+                                          <!-- balcony -->
+                                          {% if Item.estate_status == "آپارتمان"  or Item.estate_status == "مغازه و تجاری" or Item.estate_status == "دفتر کار اداری" or Item.estate_status == "خانه ویلایی" or Item.estate_status == "ویلا" %}
+                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                                <span class="property-info-icon icon-garage">
+                                                    <img src="{% static 'assets/img/icon/balcony-orange.png' %}">
+                                                </span>
+                                                <span class="property-info-entry">
+                                                    <span class="property-info-label"> بالکن </span>
+                                                    <span class="property-info-value">  {% if Item.balcony %} دارد {% else %} ندارد {% endif %} </span>
+                                                </span>
+                                            </div>
+                                          {% endif %}
+
+
+                                        </div>
+
+                                        <div class="dealer-section-space">
+                                            <span> کارشناس فروش این فایل </span>
+                                        </div>
+                                        <div class="clear">
+                                            <div class="col-xs-4 col-sm-4 dealer-face">
+                                                <a href="">
+                                                    <img src="{{ item_sales_expert.user_photo.url }}" class="img-circle">
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 ">
+                                                <h3 class="dealer-name"> {{ Item.sales_expert.first_name }} {{ Item.sales_expert.last_name }}  </h3>
+                                            </div>
+                                            <div class="clear">
+                                                <ul class="dealer-contacts">
+                                                    <li> <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {{ item_sales_expert.phone }} </a> </li>
+                                                    <li> <a href="mailto:{{ settings.email }}"> <i class="fa fa-envelope"> </i> &nbsp;&nbsp; {{ item_sales_expert.user.email }} </a> </li>
+                                                </ul>
+                                            </div>
+                                        </div><br>
+
+
+                                        <div class="dealer-section-space">
+                                            <span>اطلاعات تماس ما</span>
+                                        </div>
+                                        <div class="clear">
+                                            <div class="col-xs-4 col-sm-4 dealer-face">
+                                                <a href="">
+                                                    <img src="{{ settings.logo.url }}">
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 ">
+                                                <h6 class="dealer-name"> {{ settings.title }} </h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="clear">
+                                            <ul class="dealer-contacts">
+                                                <li> <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {{ settings.phone1 }} </a> </li>
+                                                <li> <a href="tel:{{ settings.phone2 }}"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {{ settings.phone2 }}</a> </li>
+                                                <li> <a href="mailto:{{ settings.email }}"> <i class="fa fa-envelope"> </i> &nbsp;&nbsp; {{ settings.email }} </a> </li>
+                                                <li> <a href="#"> <i class="fa fa-map-marker"> </i> &nbsp;&nbsp; {{ settings.address }} </a> </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"> درخواست تماس </h3>
+                                    <p> جهت اطلاعات بیشتر همین حالا پیام دهید </p>
+                                </div>
+                                <div class="panel-body search-widget">
+                                    <fieldset >
+                                        <div class="row">
+                                            <div class="col-xs-12" dir="ltr">
+                                               <a class="text-decoration-none button btn largesearch-btn" href="whatsapp://send?abid={{ settings.whatsapp_number }}&text=سلام. وقت تان بخیر! برای کسب اطلاعات بیشتر و مشاوره در مورد این ملک پیام دادم:  {{ domain }}{{Item.get_absolute_url}}"><i class="fab fa-whatsapp-square fs-4"></i>  <i class="fa fa-whatsapp"></i> &nbsp; ارسال پیام در واتساپ برای این ملک  </a>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                        </aside>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script type="text/javascript" src="{% static 'assets/js/lightslider.min.js' %}"></script>
+
+  <script>
+        $(document).ready(function () {
+
+            $('#image-gallery').lightSlider({
+                gallery: true,
+                item: 1,
+                thumbItem: 9,
+                slideMargin: 0,
+                speed: 500,
+                auto: true,
+                loop: true,
+                onSliderLoad: function () {
+                    $('#image-gallery').removeClass('cS-hidden');
+                }
+            });
+        });
+  </script>
+
+{% endblock javascripts %}

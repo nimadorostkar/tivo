@@ -1,0 +1,260 @@
+{% load static %}
+{% load bootstrap %}
+
+
+
+<!DOCTYPE html>
+
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>
+      {{ settings.title }}  {% block title %}{% endblock %}
+  </title>
+  <meta name="description" content="{{ settings.introduction_text }}">
+  <meta name="author" content="Nima Dorostkar">
+  <meta name="keyword" content="real estate, atrotech, amlak.app , nima dorostkar, {{ settings.title }} ">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/fontello.css">
+  <link href="{% static 'assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/fonts/icon-7-stroke/css/helper.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap-select.min.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/icheck.min_all.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/price-range.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl.theme.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/owl.transitions.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!-- Specific CSS goes HERE -->
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+<body>
+
+
+  <div id="preloader">
+  		<div id="status">&nbsp;</div>
+  </div>
+  <!-- Body content -->
+
+
+  <div class="header-connect">
+  		<div class="container">
+  				<div class="row">
+  						<div class="col-md-5 col-sm-8  col-xs-12">
+  								<div class="header-half header-call">
+  										<p>
+  												<span> <i class="fa fa-phone"></i> <a href="tel:{{ settings.phone1 }}"> {{ settings.phone1 }} </a> </span>
+                          <span> <i class="fa fa-phone"></i> <a href="tel:{{ settings.phone2 }}"> {{ settings.phone2 }} </a> </span>
+  										</p>
+  								</div>
+  						</div>
+  						<div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
+  								<div class="header-half header-social">
+  										<ul class="list-inline">
+                          <li><a href="{{ settings.instagram }}"><i class="fa fa-instagram" style="font-size:20px"></i></a></li>
+                          <li><a href="{{ settings.telegram }}"><i class="fa fa-telegram" style="font-size:20px"></i></a></li>
+  												<li><a href="{{ settings.twitter }}"><i class="fa fa-twitter" style="font-size:20px"></i></a></li>
+  												<li><a href="{{ settings.whatsapp }}"><i class="fa fa-whatsapp" style="font-size:20px"></i></a></li>
+
+  										</ul>
+  								</div>
+  						</div>
+  				</div>
+  		</div>
+  </div>
+  <!--End top header -->
+
+  <nav class="navbar navbar-default ">
+  		<div class="container">
+  				<!-- Brand and toggle get grouped for better mobile display -->
+  				<div class="navbar-header">
+  						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+  								<span class="sr-only">Toggle navigation</span>
+  								<span class="icon-bar"></span>
+  								<span class="icon-bar"></span>
+  								<span class="icon-bar"></span>
+  						</button>
+  						<a class="navbar-brand" href="{% url 'app:home' %}"><img src="{{ settings.logo.url }}" style="max-height:50px;" alt="{{ settings.title }}"></a>
+  				</div>
+
+  				<!-- Collect the nav links, forms, and other content for toggling -->
+  				<div class="collapse navbar-collapse yamm" id="navigation">
+  						<div class="button navbar-right">
+                {% if user.is_authenticated %}
+                <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.location.replace('{% url 'logout' %}')" data-wow-delay="0.5s"> خروج </button>
+                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'app:profile' %}')" data-wow-delay="0.5s"> پروفایل </button>
+                {% else %}
+                <button class="navbar-btn nav-button wow bounceInRight" onclick="window.location.replace('{% url 'register' %}')" data-wow-delay="0.4s"> ثبت نام </button>
+                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'login' %}')" data-wow-delay="0.5s"> ورود </button>
+                {% endif %}
+  						</div>
+  						<ul class="main-nav nav navbar-nav navbar-right">
+  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:home' %}"> صفحه اصلی </a> </li>
+  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:items' %}"> جستجوی املاک </a></li>
+  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/blog"> وبلاگ و اخبار  </a></li>
+  								<li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{% url 'app:favs' %}"> مورد علاقه ها  </a></li>
+  								<li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'app:contact' %}"> تماس با ما </a></li>
+                  {% if userProfile.user_type == 'کارشناس' or userProfile.user_type == 'مدیر' %}
+                   <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{% url 'crm' %}"> <i class="fa fa-dashboard" style="font-size:18px"></i> پنل کارشناس </a></li>
+                  {% endif %}
+  						</ul>
+  				</div><!-- /.navbar-collapse -->
+  		</div><!-- /.container-fluid -->
+  </nav>
+  <!-- End of nav bar -->
+
+
+
+
+{% block content %}{% endblock content %}
+
+
+
+
+
+
+    	<!-- Footer area-->
+    <div class="footer-area">
+
+    		<div class=" footer">
+    				<div class="container">
+    						<div class="row" align="right">
+
+    								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
+    										<div class="single-footer">
+    												<h4> درباره ما </h4>
+    												<div class="footer-title-line"></div>
+    												<img src="{{ settings.logo.url }}" alt="{{ settings.title }}" class="wow pulse" data-wow-delay="1s">
+    												<p dir="rtl"> {{ settings.title_below }} </p>
+    										</div>
+    								</div>
+    								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
+    										<div class="single-footer">
+    												<h4> پیوندها  </h4>
+    												<div class="footer-title-line"></div>
+    												<ul class="footer-menu" dir="rtl" align="center">
+    														<li><a href="{% url 'app:items' %}"> جستجو املاک </a></li>
+    														<li><a href="/blog"> وبلاگ و اخبار </a></li>
+    														<li><a href="{% url 'app:favs' %}"> مورد علاقه ها </a></li>
+    														<li><a href="{% url 'app:contact' %}">  تماس با ما  </a></li>
+    														<li><a href="{% url 'app:profile' %}"> پروفایل </a>  </li>
+                                <button class="navbar-btn nav-button wow bounceInRight login" onclick="window.location.replace('{% url 'register' %}')" data-wow-delay="0.4s"> ثبت نام </button>
+                                <button class="navbar-btn nav-button wow fadeInRight login" onclick=" window.location.replace('{% url 'login' %}')" data-wow-delay="0.5s"> ورود </button>
+    												</ul>
+    										</div>
+    								</div>
+    								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
+    										<div class="single-footer">
+    												<h4> آخرین اخبار </h4>
+    												<div class="footer-title-line"></div>
+    												<ul class="footer-blog">
+
+                            {% for post in footer_latestpost_list %}
+    														<li dir="rtl">
+    																<div class="col-md-3 blg-thumb p0">
+    																		<a href="{% url 'blog-detail' post.slug %}"> <img src="{{post.img.url}}"> </a>
+    																</div>
+    																<div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
+    																		<h6> <a href="{% url 'blog-detail' post.slug %}"> {{ post.title | slice:':20' | safe}}... </a></h6>
+    																		{{post.body | slice:':65' | safe}}...
+    																</div>
+    														</li> <br>
+                            {% endfor %}
+
+
+    												</ul>
+    										</div>
+    								</div>
+    								<div class="col-md-3 col-sm-6 wow fadeInRight animated">
+    										<div class="single-footer news-letter">
+    												<h4> در ارتباط باشید </h4>
+    												<div class="footer-title-line"></div>
+                            <ul class="footer-adress" dir="rtl">
+                                <li> <a href="tel:{{ settings.phone1 }}"> <i class="fa fa-phone"></i> {{ settings.phone1 }} </a> </li>
+                                <li> <a href="tel:{{ settings.phone2 }}"> <i class="fa fa-phone"></i> {{ settings.phone2 }} </a> </li>
+                                <li> <a href="mailto:{{ settings.email }}"> <i class="fa fa-envelope"> </i> {{ settings.email }} </a> </li>
+                                <li> <i class="fa fa-map-marker"> </i> {{ settings.address }} </li>
+                            </ul>
+                            <br>
+    												<div class="social pull-right">
+    														<ul>
+    																<li><a class="wow fadeInUp animated" href="{{ settings.whatsapp }}"><i class="fa fa-whatsapp"></i></a></li>
+    																<li><a class="wow fadeInUp animated" href="{{ settings.instagram }}" data-wow-delay="0.3s"><i class="fa fa-instagram"></i></a></li>
+    																<li><a class="wow fadeInUp animated" href="{{ settings.telegram }}" data-wow-delay="0.4s"><i class="fa fa-telegram"></i></a></li>
+    																<li><a class="wow fadeInUp animated" href="{{ settings.twitter }}" data-wow-delay="0.5s"><i class="fa fa-twitter"></i></a></li>
+    														</ul>
+    												</div>
+    										</div>
+    								</div>
+
+    						</div>
+    				</div>
+    		</div>
+
+    		<div class="footer-copy text-center">
+    				<div class="container">
+    						<div class="row">
+    								<div class="pull-left">
+    										<span> &#169; <a href="http://www.Atrotech.ir">Atrotech</a> , All rights reserved </span>
+    								</div>
+    								<div class="bottom-menu pull-right">
+    										<ul>
+    												<li><a class="wow fadeInUp animated" href="{% url 'app:home' %}" data-wow-delay="0.2s">Home</a></li>
+    												<li><a class="wow fadeInUp animated" href="/blog" data-wow-delay="0.4s">Blog</a></li>
+    												<li><a class="wow fadeInUp animated" href="{% url 'app:contact' %}" data-wow-delay="0.6s">Contact</a></li>
+    										</ul>
+    								</div>
+    						</div>
+    				</div>
+    		</div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <script src="{% static 'assets/js/modernizr-2.6.2.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap-hover-dropdown.js' %}"></script>
+
+    <script src="{% static 'assets/js/easypiechart.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.easypiechart.min.js' %}"></script>
+
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/wow.js' %}"></script>
+
+    <script src="{% static 'assets/js/icheck.min.js' %}"></script>
+    <script src="{% static 'assets/js/price-range.js' %}"></script>
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}
+
+</body>
+</html>
