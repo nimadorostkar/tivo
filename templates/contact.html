@@ -10,82 +10,66 @@
 
 
 
-
-        <div style="background:#494C53 url({{ settings.header_image.url }}) no-repeat scroll center top / cover; color:#FFF; position: relative; min-height: 140px; ">
-            <div class="container">
-                <div class="row" dir="rtl">
-                    <div class="page-head-content">
-                        <h1 class="page-title"> تماس با ما </h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End page header -->
-
-
+<!-- Header -->
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1> پشتیبانی  </h1>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</header> <!-- end of ex-header -->
+<!-- end of header -->
 
 
+<!-- Breadcrumbs -->
+<div class="ex-basic-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumbs">
+                    <a href="index.html"> پشتیبانی </a><i class="fa fa-angle-double-right"></i><span>  املاک اَپ  </span>
+                </div> <!-- end of breadcrumbs -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of ex-basic-1 -->
+<!-- end of breadcrumbs -->
 
 
-
-        <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
-            <div class="container">
-                <div class="row" dir="rtl" align="center">
-
-                    <div class="blog-lst col-md-12 pl0">
-                      <section class="post">
-                          <div class="text-center padding-b-50">
-                              <h2 class="wow fadeInLeft animated" dir="rtl"> {{ settings.title }} </h2>
-                              <div class="title-line wow fadeInRight animated"></div>
-                          </div>
-                            <hr><br>
-                            <p> {{ settings.contact_page_text }} </p>
-                      </section>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
-
-
-
+<br><br><br>
 
         <!-- property area -->
         <div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
             <div class="container" dir="rtl" align="center">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-12 col-md-offset-2">
                         <div class="" id="contact1">
                           <div class="row">
                               <div class="col-sm-4">
                                   <h3><i class="fa fa-map-marker"></i> آدرس </h3>
-                                   <br> <p> {{ settings.address }} </p>
+                                   <br> <p> تهران ، پیروزی تقاطع نبرد شمالی و پاسدار گمنام</p>
                               </div>
                               <!-- /.col-sm-4 -->
                               <div class="col-sm-4">
                                   <h3><i class="fa fa-phone"></i> تماس تلفنی </h3>
                                   <br>
-                                  <p>
-                                     <a href="tel:{{ settings.phone1 }}"> <i class="pe-7s-call"></i> {{ settings.phone1 }}</a>
-                                     <br>
-                                     <a href="tel:{{ settings.phone2 }}"> <i class="pe-7s-call"></i> {{ settings.phone2 }} </a>
-                                  </p>
+                                     <a href="tel:{{ settings.phone1 }}" dir="ltr" style="text-decoration: none;"> <i class="pe-7s-call"></i> ۰۲۱ ۲۸۴۲۶۰۵۲ </a>
                               </div>
                               <!-- /.col-sm-4 -->
                               <div class="col-sm-4">
                                   <h3><i class="fa fa-envelope"></i> پشتیبانی الکترونیکی </h3>
                                   <br>
-                                  <p> <a href="mailto:{{ settings.email }}"> {{ settings.email }}</a> </p>
+                                  <p> <a href="mailto:{{ settings.email }}" style="text-decoration: none;"> contact@amlak.app </a> </p>
 
                               </div>
                               <!-- /.col-sm-4 -->
                           </div>
                           <!-- /.row -->
 
+                          <br>
 
-                            <hr>
                               <iframe
                                width="700"
                                height="350"
@@ -93,42 +77,43 @@
                                scrolling="yes"
                                marginheight="0"
                                marginwidth="0"
-                               src="https://maps.google.com/maps?q={{ settings.lat_long }}&hl=es&z=14&amp;output=embed">
+                               src="https://maps.google.com/maps?q=35.672263, 51.479846&hl=es&z=14&amp;output=embed">
                               </iframe>
-                            <hr>
+
+                           <br><br><br>
 
 
-
-
-
-                            <h2> فرم تماس </h2> <hr>
+                            <h2> فرم تماس و پشتیبانی</h2> <hr>
                             <form method="post" dir="rtl">
                               {% csrf_token %}
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="phone">شماره تماس</label>
-                                            <input name="phone" type="text" class="form-control" id="phone">
+                                            <label for="name">نام</label>
+                                            <input name="name" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="name">نام</label>
-                                            <input name="name" type="text" class="form-control" id="name">
+                                            <label for="phone">شماره تماس</label>
+                                            <input name="phone" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="body"> متن پیام </label>
-                                            <textarea name="body" id="body" class="form-control"></textarea>
+                                            <textarea name="body" class="form-control" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center">
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> ارسال پیام </button>
+                                      <button type="submit" class="btn-solid-reg page-scroll">  ارسال پیام  </button>
                                     </div>
                                 </div>
                                 <!-- /.row -->
                             </form>
+
+                            <br><br><br>
+
                         </div>
                     </div>
                 </div>

@@ -703,13 +703,13 @@ input[type='checkbox'] {
 }
 
 .navbar-custom .navbar-brand.logo-image img {
-    width: 7rem;
-	height: 4.5rem;
+    width: 5rem;
+	height: 3rem;
 }
 
 .navbar-custom .navbar-brand.logo-text {
-	font: 700 2rem/1.5rem "iransans", sans-serif;
-	color: #fff;;
+	font: 400 1rem/0.5rem "iransans", sans-serif;
+	color: #fff;
 	text-decoration: none;
 }
 
@@ -1539,7 +1539,7 @@ a:hover.back-to-top {
 /***************************/
 .ex-header {
 	padding-top: 8rem;
-	padding-bottom: 5rem;
+	padding-bottom: 3rem;
 	background-color: #5f4dee;
 	text-align: center;
 }
@@ -1732,11 +1732,7 @@ a:hover.back-to-top {
 	/* end of footer */
 
 
-	/* Extra Pages */
-	.ex-header {
-		padding-top: 11rem;
-		padding-bottom: 9rem;
-	}
+
 
 	.ex-basic-2 .text-container.dark {
 		padding: 2.5rem 3rem 2rem 3rem;
