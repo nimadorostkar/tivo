@@ -55,44 +55,45 @@
                             <form method="post" dir="rtl">
                               {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="name">نام</label>
-                                            <input name="name" type="text" class="form-control" required>
+                                            <input name="fname" type="text" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="phone">نام خانوادگی</label>
+                                            <input name="lname" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="phone">شماره تماس</label>
                                             <input name="phone" type="text" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="phone">شماره تماس</label>
-                                            <input name="phone" type="text" class="form-control" required>
+                                            <label for="phone">پکیج</label>
+                                            <input name="package" type="text" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="phone">شماره تماس</label>
-                                            <input name="phone" type="text" class="form-control" required>
+                                            <label for="phone">نام دامنه</label>
+                                            <input name="domain" type="text" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="body"> متن پیام </label>
-                                            <textarea name="body" class="form-control" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="body"> متن پیام </label>
-                                            <textarea name="body" class="form-control" required></textarea>
+                                            <label for="phone">کد تخفیف</label>
+                                            <input name="discount" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center">
-                                      <button type="submit" class="btn-solid-reg page-scroll">  ارسال پیام  </button>
+                                      <br>
+                                      <button type="submit" class="btn-solid-reg page-scroll"> بررسی و نهایی کردن پرداخت </button>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -100,7 +101,7 @@
 
 
 
-                            <br><br><br>
+                            <br><br><br><br>
 
                         </div>
                     </div>

@@ -39,8 +39,8 @@ admin.site.register(Package, PackageAdmin)
 
 #------------------------------------------------------------------------------
 class RequestsAdmin(admin.ModelAdmin):
-    list_display = ('fname', 'lname', 'package')
-    list_filter = ('package',)
+    list_display = ('fname', 'lname', 'package', 'date_created')
+    list_filter = ('package','date_created')
     search_fields = ('fname', 'lname', 'phone')
 admin.site.register(Requests, RequestsAdmin)
 

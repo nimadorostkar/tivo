@@ -59,6 +59,7 @@ class Requests(models.Model):
     discount = models.CharField(max_length=80, verbose_name="کد تخفیف")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ درخواست")
 
+    paid = models.BooleanField(default = False, verbose_name="پرداخت شده")
     final_price = models.IntegerField(null=True, blank=True, verbose_name = "قیمت نهایی")
     date_launched = jmodels.jDateTimeField(null=True, blank=True, verbose_name = "تاریخ راه اندازی")
 
