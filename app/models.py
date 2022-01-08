@@ -39,7 +39,7 @@ class Package(models.Model):
         verbose_name_plural = "بسته ها"
 
     def __str__(self):
-        return str(self.month) + " ماهه | " + str(self.price) + 'تومان'
+        return str(self.month) + " ماهه | " + str(self.price) + ' تومان '
 
 
 
@@ -51,18 +51,24 @@ class Package(models.Model):
 
 #------------------------------------------------------------------------------
 class Requests(models.Model):
-    fname = models.CharField(max_length=80, verbose_name="aaaa")
-    lname = models.CharField(max_length=80, verbose_name="aaaa")
-    phone = models.CharField(max_length=80, verbose_name="aaaa")
+    fname = models.CharField(max_length=80, verbose_name="نام")
+    lname = models.CharField(max_length=80, verbose_name="نام خانوادگی")
+    phone = models.CharField(max_length=80, verbose_name="شماره تماس")
     package = models.ForeignKey(Package, on_delete=models.CASCADE, verbose_name = "بسته")
-    discount = models.ForeignKey(Discounts, on_delete=models.CASCADE, verbose_name = "تخفیف")
+    domain = models.CharField(max_length=80, verbose_name="نام دامنه")
+    discount = models.CharField(max_length=80, verbose_name="کد تخفیف")
+    date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ درخواست")
+
+    final_price = models.IntegerField(null=True, blank=True, verbose_name = "قیمت نهایی")
+    date_launched = jmodels.jDateTimeField(null=True, blank=True, verbose_name = "تاریخ راه اندازی")
+
 
     class Meta:
         verbose_name = "درخواست"
         verbose_name_plural = "درخواست ها"
 
     def __str__(self):
-        return str(self.fname) + str(self.lname) + " | " + str(self.package.month)
+        return str(self.fname) + str(self.lname) + " | " + str(self.package.month) + " ماهه "
 
 
 
