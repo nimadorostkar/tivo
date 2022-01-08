@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
-    path("", include("authentication.urls")), # Auth routes - login / register
     path("", include("app.urls")),            # UI Kits Html files
 ]
 if settings.DEBUG:

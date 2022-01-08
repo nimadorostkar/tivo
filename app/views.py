@@ -4,16 +4,15 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import Profile,Contact
-from .forms import ProfileForm, UserForm, ContactForm
+from .models import  Discounts, Package, Requests, Contact
+from .forms import ContactForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
 from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.urls import reverse
 from django.contrib import messages
-from django.views import generic
-from django.contrib.auth.forms import PasswordChangeForm
+
 
 
 

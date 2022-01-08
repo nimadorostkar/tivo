@@ -28,9 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'authentication',
     'django.contrib.humanize',
-    'import_export',
     'jalali_date',
     'app'
 ]
