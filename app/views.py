@@ -131,6 +131,20 @@ def contact(request):
 
 
 
+#------------------------------------------------------------------------------
+def about(request):
+    html_template = loader.get_template( 'about.html' )
+    return HttpResponse(html_template.render({}, request))
+
+
+
+
+
+
+
+
+
+
 
 
 

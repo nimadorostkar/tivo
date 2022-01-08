@@ -1,6 +1,6 @@
 from django.urls import path, re_path
 from app import views
-from .views import profile, contact 
+from .views import profile, contact
 
 app_name='app'
 
@@ -10,5 +10,5 @@ urlpatterns = [
     # etc
     path('profile', views.profile, name='profile'),
     path('contact', views.contact, name='contact'),
-    path('search',views.search,name='search'),
+    path('about', views.about, name='about'),
 ]
