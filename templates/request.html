@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} ثبت سفارش {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+<!-- Header -->
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1> پشتیبانی  </h1>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</header> <!-- end of ex-header -->
+<!-- end of header -->
+
+
+<!-- Breadcrumbs -->
+<div class="ex-basic-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumbs">
+                    <a href="index.html">  ثبت سفارش  </a><i class="fa fa-angle-double-right"></i><span>  املاک اَپ  </span>
+                </div> <!-- end of breadcrumbs -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of ex-basic-1 -->
+<!-- end of breadcrumbs -->
+
+
+<br><br><br>
+
+        <!-- property area -->
+        <div class="content-area recent-property padding-top-40" style="background-color: #FFF;">
+            <div class="container" dir="rtl" align="center">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <div class="" id="contact1">
+
+
+                            <h2> فرم تماس و پشتیبانی</h2> <hr>
+                            <form method="post" dir="rtl">
+                              {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name">نام</label>
+                                            <input name="name" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">شماره تماس</label>
+                                            <input name="phone" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">شماره تماس</label>
+                                            <input name="phone" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">شماره تماس</label>
+                                            <input name="phone" type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="body"> متن پیام </label>
+                                            <textarea name="body" class="form-control" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="body"> متن پیام </label>
+                                            <textarea name="body" class="form-control" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                      <button type="submit" class="btn-solid-reg page-scroll">  ارسال پیام  </button>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </form>
+
+
+
+                            <br><br><br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

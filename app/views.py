@@ -141,6 +141,14 @@ def about(request):
 
 
 
+#------------------------------------------------------------------------------
+def request(request):
+    html_template = loader.get_template( 'request.html' )
+    return HttpResponse(html_template.render({}, request))
+
+
+
+
 
 
 
