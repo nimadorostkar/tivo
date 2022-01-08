@@ -16,7 +16,6 @@
         <div class="row">
             <div class="col-md-12">
                 <h1> ثبت سفارش  </h1>
-                <h6 style="color:white;"> ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش </h6>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
     </div> <!-- end of container -->
@@ -49,45 +48,51 @@
                         <div class="" id="contact1">
 
 
-                          <div class="above-heading"> ثبت سفارش  ثبت سفارش ثبت سفارش  ثبت سفارش ثبت سفارش  ثبت سفارش </div>
+                          <h6> ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش ثبت سفارش </h6>
                           <br><br>
 
-                            <form method="post" dir="rtl">
+                            <form action="#" method="post" dir="rtl" align="right">
                               {% csrf_token %}
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="name">نام</label>
+                                            <label class="above-heading" for="name">نام</label>
                                             <input name="fname" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="phone">نام خانوادگی</label>
+                                            <label class="above-heading" for="phone">نام خانوادگی</label>
                                             <input name="lname" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="phone">شماره تماس</label>
+                                            <label class="above-heading" for="phone">شماره تماس</label>
                                             <input name="phone" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="phone">پکیج</label>
-                                            <input name="package" type="text" class="form-control" required>
+                                            <label class="above-heading" for="phone">پکیج</label>
+                                            <select name="package" class="form-control" required>
+                                              {% for Package in packages %}
+                                                <option value={{Package.id}}>{{Package}}</option>
+                                              {% endfor %}
+                                            </select>
+
+
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="phone">نام دامنه</label>
+                                            <label class="above-heading" for="phone">نام دامنه</label>
                                             <input name="domain" type="text" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="phone">کد تخفیف</label>
+                                            <label class="above-heading" for="phone">کد تخفیف</label>
                                             <input name="discount" type="text" class="form-control" required>
                                         </div>
                                     </div>

@@ -142,8 +142,22 @@ def about(request):
 
 #------------------------------------------------------------------------------
 def request(request):
+    packages = models.Package.objects.all()
+    if request.method == "POST":
+        req = Requests()
+        req.fname = request.POST['fname']
+        req.lname = request.POST['lname']
+        req.phone = request.POST['phone']
+        req.package = get_object_or_404(Package, id=request.POST['package'])
+        req.domain = request.POST['domain']
+        req.discount = request.POST['discount']
+        req.save()
+
+        html_template = loader.get_template( 'checkout.html' )
+        return HttpResponse(html_template.render({}, request))
+
     html_template = loader.get_template( 'request.html' )
-    return HttpResponse(html_template.render({}, request))
+    return HttpResponse(html_template.render({'packages':packages}, request))
 
 
 
