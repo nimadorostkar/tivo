@@ -32,7 +32,7 @@ class Profile(models.Model):
       verbose_name_plural = "شماره کاربران"
 
   def __str__(self):
-    return self.phone +"|"+ str(self.user)
+    return str(self.phone) +"|"+ str(self.user)
 
 
 

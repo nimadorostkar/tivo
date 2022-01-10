@@ -12,8 +12,8 @@ from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.urls import reverse
 from django.contrib import messages
-
-
+from django.contrib.auth import authenticate, login as Login_process
+from django.contrib.auth.models import User
 
 
 
@@ -175,7 +175,7 @@ def login(request):
         password = request.POST["password"]
         user = authenticate(username=username, password=password)
         if user is not None:
-            login(request, user)
+            Login_process(request, user)
             return redirect("/")
         else:
             msg = 'اطلاعات معتبر نیست'
@@ -189,24 +189,76 @@ def login(request):
 
 
 
+#------------------------------------------------------------------------------
+def signup(request):
+    msg = None
+    if request.method == "POST":
+
+        if request.POST["username"] in models.User.objects.all().values_list('username',flat=True):
+            msg = 'نام کاربری تکراریست'
+        elif len(request.POST["phone"]) != 11 :
+            msg = 'شماره تماس را تصحیح کنید، شماره باید ۱۱ رقم باشد'
+        elif request.POST["phone"][0] != '0' :
+            msg = 'شماره تماس را تصحیح کنید، شماره باید با ۰ شروع شود'
+        elif request.POST["phone"][1] != '9' :
+            msg = 'شماره تماس را تصحیح کنید، شماره باید با ۰۹ شروع شود'
+        elif len(request.POST["password"]) < 8 :
+            msg = 'رمزعبور را تصحیح کنید، رمزعبور باید حداقل ۸ رقم باشد'
+        else:
+            user = User()
+            user.username = request.POST["username"]
+            user.set_password(request.POST['password'])
+            user.save()
+            profile = get_object_or_404(Profile, user=user)
+            profile.phone = request.POST["phone"]
+            profile.save()
+            msg = 'حساب کاربری شما ایجاد شد - <a style="color:#5f4ded;" href="/login">ورود</a>.'
+
+    return render(request, "signup.html", { "msg":msg })
+
+
+
+
+
 
 
 
 
 
 #------------------------------------------------------------------------------
-def signup(request):
+def profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    msg = None
     if request.method == "POST":
-        req = Requests()
-        req.fname = request.POST['fname']
-        req.package = get_object_or_404(Package, id=request.POST['package'])
-        req.save()
+        if len(request.POST["phone"]) != 11 :
+            msg = 'شماره تماس را تصحیح کنید، شماره باید ۱۱ رقم باشد'
+        elif request.POST["phone"][0] != '0' :
+            msg = 'شماره تماس را تصحیح کنید، شماره باید با ۰ شروع شود'
+        elif request.POST["phone"][1] != '9' :
+            msg = 'شماره تماس را تصحیح کنید، شماره باید با ۰۹ شروع شود'
+        #elif len(request.POST["password"]) < 8 :
+            #msg = 'رمزعبور را تصحیح کنید، رمزعبور باید حداقل ۸ رقم باشد'
+        else:
+            user=request.user
+            #user.username = request.POST["username"]
+            #user.set_password(request.POST['password'])
+            user.first_name = request.POST["fname"]
+            user.last_name = request.POST["lname"]
+            user.email = request.POST["email"]
+            user.save()
+            profile = get_object_or_404(Profile, user=user)
+            profile.phone = request.POST["phone"]
+            profile.save()
+            msg = 'تغییرات اعمال شد'
 
-        html_template = loader.get_template( 'signup.html' )
-        return HttpResponse(html_template.render({}, request))
 
-    html_template = loader.get_template( 'signup.html' )
-    return HttpResponse(html_template.render({}, request))
+
+    html_template = loader.get_template( 'profile.html' )
+    return HttpResponse(html_template.render( { 'profile':profile , 'msg':msg }, request) )
+
+
+
+
 
 
 

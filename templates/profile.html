@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} |  پروفایل کاربری {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+
+<!-- Header -->
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>  پروفایل کاربری </h1>
+                <h6> {{ request.user }} </h6>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</header> <!-- end of ex-header -->
+<!-- end of header -->
+
+
+<!-- Breadcrumbs -->
+<div class="ex-basic-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumbs" dir="rtl">
+                    <a href="index.html"> {{ request.user }} </a><i class="fa fa-angle-double-right"></i>  پروفایل کاربری  </a><i class="fa fa-angle-double-right"></i><span>  املاک اَپ  </span>
+                </div> <!-- end of breadcrumbs -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of ex-basic-1 -->
+<!-- end of breadcrumbs -->
+
+
+
+
+  <!-- Details -->
+  <div id="details" class="basic-1" dir="rtl" align="right">
+      <div class="container">
+
+          <div class="row">
+              <div class="col-lg-12">
+
+                <!-- Sign Up Form -->
+                <div class="form-container">
+                    <form action="{% url 'app:profile' %}" method="post">
+                    {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                              <div class="form-group">
+                                  <label>نام</label>
+                                  <input type="text" name="fname" class="form-control-input" value="{{ request.user.first_name }}">
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>نام خانوادگی</label>
+                                    <input type="text" name="lname" class="form-control-input" value="{{ request.user.last_name }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="form-group">
+                                <label>شماره تماس</label>
+                                  <input type="number" name="phone" class="form-control-input" value="{{ profile.phone }}">
+                              </div>
+                            </div>
+                            <div class="col-sm-3">
+                              <div class="form-group">
+                                  <label>ایمیل</label>
+                                  <input type="email" name="email" class="form-control-input" value="{{ request.user.email }}">
+                              </div>
+                            </div>
+
+                            <div class="col-sm-12 text-center">
+                              <div class="form-group">  <br>
+                               <button type="submit" class="btn-solid-reg page-scroll"> ذخیره </button>
+                              </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-message">
+                          <div id="lmsgSubmit" class="h6 text-center hidden">
+                            {% if msg %} {{ msg | safe }} {% else %} {% endif %}
+                          </div>
+                        </div>
+
+                    </form>
+                </div> <!-- end of form container -->
+                <!-- end of sign up form -->
+
+              </div> <!-- end of col -->
+          </div> <!-- end of row -->
+
+
+                <div style="padding-right:80px;">
+                  <br><br>
+                  <a href="#"> <small> خروج <i class="fa fa-sign-out-alt"></i>  </small> </a>
+                  <br>
+                  <a href="#"> <small>  تغییر رمزعبور <i class="fa fa-key"></i>  </small> </a>
+                </div>
+
+      </div> <!-- end of container -->
+  </div> <!-- end of basic-1 -->
+  <!-- end of details -->
+
+
+
+
+  <br><br>
+<!--
+  <div class="col-sm-4">
+      <div class="form-group">
+          <input type="password" name="password" class="form-control-input" id="password" value="{{ request.user.password }}" required>
+          <label class="label-control" for="password">رمزعبور جدید</label>
+      </div>
+  </div>
+-->
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}
