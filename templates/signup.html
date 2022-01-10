@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} ثبت نام {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+    <!-- Header -->
+    <header id="header" class="ex-2-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1> ثبت نام  </h1>
+                   <p dir="rtl"> برای ثبت نام در املاک اَپ فرم زیر را پر کنید.  قبلا ثبت نام کرده اید؟ پس <a style="color:#c3c2cdb0;text-decoration: none;" href="{% url 'app:login' %}"> وارد شوید </a></p>
+                    <!-- Sign Up Form -->
+                    <div class="form-container">
+                        <form id="signUpForm" data-toggle="validator" data-focus="false">
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="username" required>
+                                <label class="label-control" for="username">نام کاربری</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="phone" required>
+                                <label class="label-control" for="phone">شماره تماس</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control-input" id="password" required>
+                                <label class="label-control" for="password">رمزعبور</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group checkbox" dir="rtl">
+                                <input type="checkbox" id="sterms" value="Agreed-to-Terms" required>  من <a href="privacy-policy.html"> حریم خصوصی </a> و <a href="terms-conditions.html"> شرایط و ضوابط </a> املاک اَپ را خوانده ام و موافقم.
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control-submit-button">ثبت نام</button>
+                            </div>
+                            <div class="form-message">
+                                <div id="smsgSubmit" class="h3 text-center hidden"></div>
+                            </div>
+                        </form>
+                    </div> <!-- end of form container -->
+                    <!-- end of sign up form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

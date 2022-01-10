@@ -167,6 +167,45 @@ def request(request):
 
 
 
+#------------------------------------------------------------------------------
+def login(request):
+    packages = models.Package.objects.all()
+    if request.method == "POST":
+        req = Requests()
+        req.fname = request.POST['fname']
+        req.lname = request.POST['lname']
+        req.phone = request.POST['phone']
+        req.package = get_object_or_404(Package, id=request.POST['package'])
+        req.domain = request.POST['domain']
+        req.discount = request.POST['discount']
+        req.save()
+
+        html_template = loader.get_template( 'login.html' )
+        return HttpResponse(html_template.render({}, request))
+
+    html_template = loader.get_template( 'login.html' )
+    return HttpResponse(html_template.render({'packages':packages}, request))
+
+
+
+
+#------------------------------------------------------------------------------
+def signup(request):
+    if request.method == "POST":
+        req = Requests()
+        req.fname = request.POST['fname']
+        req.package = get_object_or_404(Package, id=request.POST['package'])
+        req.save()
+
+        html_template = loader.get_template( 'signup.html' )
+        return HttpResponse(html_template.render({}, request))
+
+    html_template = loader.get_template( 'signup.html' )
+    return HttpResponse(html_template.render({}, request))
+
+
+
+
 
 
 

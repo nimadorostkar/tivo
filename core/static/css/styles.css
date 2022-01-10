@@ -297,7 +297,7 @@ a.white {
 .label-control {
 	position: absolute;
 	top: 0.87rem;
-	left: 1.25rem;
+	right: 1.25rem;
 	color: #555;
 	opacity: 1;
 	font: 400 0.875rem/1.375rem "iransans", sans-serif;
@@ -328,7 +328,8 @@ a.white {
 	width: 100%;
 	padding-top: 1.0625rem;
 	padding-bottom: 0.0625rem;
-	padding-left: 1.25rem;
+  direction: rtl;
+	padding-right: 1.25rem;
 	border: 1px solid #c4d8dc;
 	border-radius: 0.25rem;
 	background-color: #fff;
