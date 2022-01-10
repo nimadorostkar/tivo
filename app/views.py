@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import  Discounts, Package, Requests, Contact
+from .models import Profile, Discounts, Package, Requests, Contact
 from .forms import ContactForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
@@ -169,22 +169,27 @@ def request(request):
 
 #------------------------------------------------------------------------------
 def login(request):
-    packages = models.Package.objects.all()
+    msg = None
     if request.method == "POST":
-        req = Requests()
-        req.fname = request.POST['fname']
-        req.lname = request.POST['lname']
-        req.phone = request.POST['phone']
-        req.package = get_object_or_404(Package, id=request.POST['package'])
-        req.domain = request.POST['domain']
-        req.discount = request.POST['discount']
-        req.save()
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("/")
+        else:
+            msg = 'اطلاعات معتبر نیست'
 
-        html_template = loader.get_template( 'login.html' )
-        return HttpResponse(html_template.render({}, request))
+    return render(request, "login.html", { "msg":msg } )
 
-    html_template = loader.get_template( 'login.html' )
-    return HttpResponse(html_template.render({'packages':packages}, request))
+
+
+
+
+
+
+
+
 
 
 

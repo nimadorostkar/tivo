@@ -1,6 +1,43 @@
 from django.db import models
 from extensions.utils import jalali_converter
 from django_jalali.db import models as jmodels
+from django.contrib.auth.models import User
+from django.urls import reverse
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+class Profile(models.Model):
+  user = models.OneToOneField(User, on_delete=models.CASCADE,unique=True,related_name='profile',verbose_name = "کاربر")
+  phone = models.CharField(max_length=50,null=True, blank=True,verbose_name = " شماره تماس  ")
+
+  @receiver(post_save, sender=User)
+  def create_user_profile(sender, instance, created, **kwargs):
+      if created:
+          Profile.objects.create(user=instance)
+
+  @receiver(post_save, sender=User)
+  def save_user_profile(sender, instance, **kwargs):
+      instance.profile.save()
+
+  class Meta:
+      verbose_name = "شماره کاربر"
+      verbose_name_plural = "شماره کاربران"
+
+  def __str__(self):
+    return self.phone +"|"+ str(self.user)
+
+
+
+
+
 
 
 
