@@ -54,24 +54,8 @@
                             <form action="#" method="post" dir="rtl" align="right">
                               {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label class="above-heading" for="name">نام</label>
-                                            <input name="fname" type="text" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label class="above-heading" for="phone">نام خانوادگی</label>
-                                            <input name="lname" type="text" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label class="above-heading" for="phone">شماره تماس</label>
-                                            <input name="phone" type="text" class="form-control" required>
-                                        </div>
-                                    </div>
+
+
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="above-heading" for="phone">پکیج</label>
@@ -80,22 +64,23 @@
                                                 <option value={{Package.id}}>{{Package}}</option>
                                               {% endfor %}
                                             </select>
-
-
                                         </div>
                                     </div>
+
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="above-heading" for="phone">نام دامنه</label>
                                             <input name="domain" type="text" class="form-control" required>
                                         </div>
                                     </div>
+
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="above-heading" for="phone">کد تخفیف</label>
                                             <input name="discount" type="text" class="form-control" required>
                                         </div>
                                     </div>
+
                                     <div class="col-sm-12 text-center">
                                       <br>
                                       <button type="submit" class="btn-solid-reg page-scroll"> بررسی و نهایی کردن پرداخت </button>

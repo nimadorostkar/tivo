@@ -24,8 +24,6 @@
   <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
   <meta property="og:type" content="article" />
 
-
-  <!-- Styles -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
   <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
   <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet">
@@ -113,6 +111,11 @@
                       {% else %}
                       <a class="btn-outline-sm" href="{% url 'app:login' %}"> ورود <i class="fas fa-user"></i> </a>
                       {% endif %}
+
+                      {% if request.user.is_superuser %}
+                        <a class="btn-outline-sm" href="{% url 'admin:index' %}"> داشبورد <i class="fas fa-tachometer-alt"></i> </a>
+                      {% endif %}
+
                   </span>
               </div>
           </div> <!-- end of container -->
