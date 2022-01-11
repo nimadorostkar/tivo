@@ -279,8 +279,12 @@ def profile(request):
 #------------------------------------------------------------------------------
 def checkout(request, id):
     req = get_object_or_404(Requests, id=id)
+    #discount = get_object_or_404(Discounts, code=req.discount)
+    discounts = models.Discounts.objects.filter(active=True)
+
+
     html_template = loader.get_template( 'checkout.html' )
-    return HttpResponse(html_template.render( {'req':req}, request) )
+    return HttpResponse(html_template.render( { 'req':req, 'discounts':discounts }, request) )
 
 
 

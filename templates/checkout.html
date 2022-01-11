@@ -52,7 +52,7 @@
                         <img class="img-fluid" src="{% static 'images/payment.png' %}" alt="alternative">
                     </div>
                   </div>
-                  <p class="p-heading" dir="rtl"> بررسی و پرداخت بررسی و پرداخت بررسی و پرداخت بررسی و پرداخت بررسی و پرداخت بررسی و پرداخت بررسی و پرداخ بررسی و پرداختت </p>
+                  <p class="p-heading" dir="rtl"> کاربر عزیز {{ req.user }} ، از اعتماد شما به مجموعه املاک اَپ سپاسگزاریم. امیدواریم که دستیار اختصاصی مشاوران املاک ما ابزاری برای توسعه کسب و کار شما باشد. در سريع ترین زمان پس از تسویه حساب سرویس شما فعال سازی خواهد شد. و کارشناسان ما ۲۴ ساعته آماده پشتیبانی و پاسخگویی به سوالاتتان هستند.  </p>
               </div> <!-- end of col -->
           </div> <!-- end of row -->
 
@@ -61,28 +61,40 @@
                   <!-- Card -->
                   <div class="card">
                       <div class="card-body">
-                          <h4 class="card-title"> gggggggg </h4>
-                          <p> hhhhhh </p>
+                          <h6 class="above-heading" for="phone"> بسته انتخابی </h6>
+                          <p> {{ req.package }} </p>
                       </div>
                   </div>
                   <!-- Card -->
                   <div class="card">
                       <div class="card-body">
-                          <h4 class="card-title"> gggggggg </h4>
-                          <p> hhhhhh </p>
+                          <h6 class="above-heading" for="phone"> دامنه انتخابی </h6>
+                          <p dir="ltr"> {{ req.domain }}.amlak.app </p>
                       </div>
                   </div>
                   <!-- end of card -->
                   <!-- Card -->
                   <div class="card">
                       <div class="card-body">
-                          <h4 class="card-title"> gggggggg </h4>
-                          <p> hhhhhh </p>
+                        <h6 class="above-heading" for="phone"> وضعیت درخواست</h6>
+                        <p> {{ req.status }} </p>
                       </div>
                   </div>
                   <!-- end of card -->
+
               </div> <!-- end of col -->
           </div> <!-- end of row -->
+
+          {% for Discount in discounts %}
+          {% if Discount.code == req.discount %}
+            <p style="font-size:15px; color:grey;" dir="rtl"> با احتساب {{ Discount.discount_percentage }} درصد تخفیف (کد تخفیف: {{ Discount.code }}) </p>
+          {% endif %}
+          {% endfor %}
+          <p style="font-size:20px; color:grey;"> مبلغ نهایی قابل پرداخت {{ req.final_price }} تومان</p>
+
+          <br>
+          <button type="submit" class="btn-solid-reg page-scroll"> پرداخت </button>
+          <br>
 
 
       </div> <!-- end of container -->
@@ -93,9 +105,6 @@
 
 
 
-
-
-<h6> {{ req.domain }} </h6>
 
 
 
