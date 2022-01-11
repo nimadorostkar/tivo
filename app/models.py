@@ -91,12 +91,10 @@ class Requests(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = "کاربر")
     package = models.ForeignKey(Package, on_delete=models.CASCADE, verbose_name = "بسته")
     domain = models.CharField(max_length=80, unique=True, verbose_name="نام دامنه")
-    #discount = models.CharField(max_length=80, verbose_name="کد تخفیف")
     discount = models.ForeignKey(Discounts, on_delete=models.CASCADE, blank=True, null=True, verbose_name = "کد تخفیف")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ درخواست")
-
-    paid = models.BooleanField(default = False, verbose_name="پرداخت شده")
     final_price = models.IntegerField(null=True, blank=True, verbose_name = "قیمت نهایی")
+    paid = models.BooleanField(default = False, verbose_name="پرداخت شده")
     date_launched = jmodels.jDateTimeField(null=True, blank=True, verbose_name = "تاریخ راه اندازی")
 
 
