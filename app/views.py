@@ -107,6 +107,7 @@ def profile(request):
 
 #------------------------------------------------------------------------------
 def contact(request):
+    msg = None
     if request.method == "POST":
         contact_form = ContactForm(data=request.POST)
         if contact_form.is_valid():
@@ -115,10 +116,11 @@ def contact(request):
             obj.phone = contact_form.cleaned_data['phone']
             obj.body = contact_form.cleaned_data['body']
             obj.save()
+            msg = 'پیام شما با موفقیت ارسال شد'
     else:
         contact_form = ContactForm(data=request.POST)
 
-    context = {'contact_form':contact_form}
+    context = {'contact_form':contact_form, 'msg':msg}
     context['segment'] = 'contact'
     html_template = loader.get_template( 'contact.html' )
     return HttpResponse(html_template.render(context, request))
@@ -163,7 +165,6 @@ def request(request):
                 req.final_price = package.price
             req.save()
             return redirect(req.get_absolute_url())
-            #return render(request, "checkout.html", { "msg":msg })
 
     return render(request, "request.html", { "packages":packages, "msg":msg })
 
@@ -246,12 +247,8 @@ def profile(request):
             msg = 'شماره تماس را تصحیح کنید، شماره باید با ۰ شروع شود'
         elif request.POST["phone"][1] != '9' :
             msg = 'شماره تماس را تصحیح کنید، شماره باید با ۰۹ شروع شود'
-        #elif len(request.POST["password"]) < 8 :
-            #msg = 'رمزعبور را تصحیح کنید، رمزعبور باید حداقل ۸ رقم باشد'
         else:
             user=request.user
-            #user.username = request.POST["username"]
-            #user.set_password(request.POST['password'])
             user.first_name = request.POST["fname"]
             user.last_name = request.POST["lname"]
             user.email = request.POST["email"]
@@ -272,6 +269,26 @@ def profile(request):
 
 
 
+#------------------------------------------------------------------------------
+@login_required(login_url='/login')
+def password_change(request):
+    msg = None
+    if request.method == 'POST':
+        if len(request.POST["new_password"]) < 8 :
+            msg = 'رمزعبور را تصحیح کنید، رمزعبور باید حداقل ۸ رقم باشد'
+        else:
+            user = request.user
+            user.set_password(request.POST['new_password'])
+            user.save()
+            msg = "رمز عبور با موفقیت تغییر یافت"
+            return redirect("/login")
+
+    return render(request, 'password_change.html', {'msg':msg})
+
+
+
+
+
 
 
 
@@ -279,10 +296,7 @@ def profile(request):
 #------------------------------------------------------------------------------
 def checkout(request, id):
     req = get_object_or_404(Requests, id=id)
-    #discount = get_object_or_404(Discounts, code=req.discount)
     discounts = models.Discounts.objects.filter(active=True)
-
-
     html_template = loader.get_template( 'checkout.html' )
     return HttpResponse(html_template.render( { 'req':req, 'discounts':discounts }, request) )
 

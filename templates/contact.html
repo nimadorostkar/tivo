@@ -107,6 +107,15 @@
                                     </div>
                                     <div class="col-sm-12 text-center">
                                       <button type="submit" class="btn-solid-reg page-scroll">  ارسال پیام  </button>
+
+                                      <div class="form-message">
+                                        <div id="lmsgSubmit" class="h6 text-center hidden" style="color:green;">
+                                          <br>
+                                          {% if msg %} {{ msg | safe }} {% else %} {% endif %}
+                                        </div>
+                                      </div>
+
+
                                     </div>
                                 </div>
                                 <!-- /.row -->
