@@ -27,7 +27,8 @@ admin.site.register(Profile, ProfileAdmin)
 
 #------------------------------------------------------------------------------
 class DiscountsAdmin(admin.ModelAdmin):
-    list_display = ('code', 'discount_percentage')
+    list_display = ('code', 'discount_percentage', 'active')
+    list_filter = ('active',)
     search_fields = ('code',)
 admin.site.register(Discounts, DiscountsAdmin)
 

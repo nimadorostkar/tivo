@@ -91,7 +91,7 @@ class Requests(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = "کاربر")
     package = models.ForeignKey(Package, on_delete=models.CASCADE, verbose_name = "بسته")
     domain = models.CharField(max_length=80, unique=True, verbose_name="نام دامنه")
-    discount = models.CharField(max_length=80, blank=True, null=True, verbose_name = "کد تخفیف") 
+    discount = models.CharField(max_length=80, blank=True, null=True, verbose_name = "کد تخفیف")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ درخواست")
     final_price = models.IntegerField(null=True, blank=True, verbose_name = "قیمت نهایی")
     paid = models.BooleanField(default = False, verbose_name="پرداخت شده")
@@ -103,7 +103,7 @@ class Requests(models.Model):
         verbose_name_plural = "درخواست ها"
 
     def __str__(self):
-        return str(self.user) + " | " + str(self.package.month) + " ماهه "
+        return str(self.user.first_name) + str(self.user.last_name) + " | " + str(self.package.month) + " ماهه "
 
 
 

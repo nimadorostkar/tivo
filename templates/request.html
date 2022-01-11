@@ -77,14 +77,24 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label class="above-heading" for="phone">کد تخفیف</label>
-                                            <input name="discount" type="text" class="form-control" required>
+                                            <input name="discount" type="text" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-12 text-center">
                                       <br>
                                       <button type="submit" class="btn-solid-reg page-scroll"> بررسی و نهایی کردن پرداخت </button>
+
+                                      <div class="form-message">
+                                        <div id="lmsgSubmit" class="h6 text-center hidden" style="color:#ed1111b5;">
+                                          <br>
+                                          {% if msg %} {{ msg | safe }} {% else %} {% endif %}
+                                        </div>
+                                      </div>
+
                                     </div>
+
+
                                 </div>
                                 <!-- /.row -->
                             </form>

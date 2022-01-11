@@ -157,7 +157,9 @@ def request(request):
             if request.POST["discount"] in models.Discounts.objects.filter(active=True).values_list('code',flat=True):
                 discount = get_object_or_404(Discounts, code=request.POST['discount'])
                 package = get_object_or_404(Package, id=request.POST['package'])
-                req.final_price = package.price * discount.discount_percentage
+                req.final_price = package.price-(package.price*(discount.discount_percentage/100)) 
+            else:
+                req.final_price = package.price
             req.save()
             return render(request, "checkout.html", { "msg":msg })
 
