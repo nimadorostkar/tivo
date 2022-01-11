@@ -14,4 +14,5 @@ urlpatterns = [
     path('signup', views.signup, name='signup'),
     path('profile', views.profile, name='profile'),
     path('logout', LogoutView.as_view(), name="logout"),
+    path('checkout/<int:id>/', views.checkout, name="checkout"),
 ]

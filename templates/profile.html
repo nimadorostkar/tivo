@@ -4,7 +4,23 @@
 {% block title %} |  پروفایل کاربری {% endblock %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+    <style>
+      table {
+      border-collapse: collapse;
+      width: 100%;
+      }
+      td, th {
+      border: 1px solid #5f4dee2b;
+      text-align: center;
+      padding: 8px;
+      }
+
+      tr:nth-child(even) {
+      background-color: #dddddd;
+      }
+    </style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -43,7 +59,36 @@
 
   <!-- Details -->
   <div id="details" class="basic-1" dir="rtl" align="right">
-      <div class="container">
+
+    <div class="container" style="overflow-x:auto;">
+        <h3> سرویس های شما: </h3>
+        <table>
+          <tr style="background-color:#484848a6">
+            <th> <h5> نام دامنه </h5> </th>
+            <th> <h5> بسته انتخابی </h5> </th>
+            <th> <h5> تاریخ درخواست </h5> </th>
+            <th> <h5> وضعیت </h5> </th>
+            <th> <h5> تاریخ راه اندازی </h5> </th>
+          </tr>
+          {% for userReq in user_reqs %}
+          <tr>
+            <td dir="ltr"> <a style="color:#5f4ded; text-decoration:none;" href="http://www.{{ userReq.domain }}.amlak.app"> {{ userReq.domain }}.amlak.app </a></td>
+            <td><p> {{ userReq.package }} </p></td>
+            <td><p> {{ userReq.date_created|date:'Y,m,d' }} ({{ userReq.date_created|date:'H:i' }}) </p></td>
+            <td><p> {{ userReq.status }} {% if userReq.status == 'در انتظار پرداخت' %} <a style="color:green;" href="{{ userReq.get_absolute_url }}"> پرداخت میکنم </a>{% endif %} </p> </td>
+            <td> {% if userReq.status == 'فعال' %} <p> {{ userReq.date_launched|date:'Y,m,d' }} </p> {% endif %}</td>
+          </tr>
+          {% endfor %}
+        </table>
+
+
+    </div>
+
+    <br><br><br>
+
+
+      <div class="container" style="max-width:720px;">
+        <br> <h3> اطلاعات کاربری </h3> <br>
 
           <div class="row">
               <div class="col-lg-12">
@@ -55,25 +100,25 @@
 
                         <div class="row">
 
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                               <div class="form-group">
                                   <label>نام</label>
                                   <input type="text" name="fname" class="form-control-input" value="{{ request.user.first_name }}">
                               </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>نام خانوادگی</label>
                                     <input type="text" name="lname" class="form-control-input" value="{{ request.user.last_name }}">
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                               <div class="form-group">
                                 <label>شماره تماس</label>
                                   <input type="number" name="phone" class="form-control-input" value="{{ profile.phone }}">
                               </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                               <div class="form-group">
                                   <label>ایمیل</label>
                                   <input type="email" name="email" class="form-control-input" value="{{ request.user.email }}">
@@ -101,20 +146,17 @@
               </div> <!-- end of col -->
           </div> <!-- end of row -->
 
-
                 <div style="padding-right:80px;">
                   <a href="{% url 'app:logout' %}"> <small> خروج <i class="fa fa-sign-out-alt"></i>  </small> </a>
                   <br>
                   <a href="#"> <small>  تغییر رمزعبور <i class="fa fa-key"></i>  </small> </a>
                 </div>
 
-                <hr>
-
       </div> <!-- end of container -->
+
+
   </div> <!-- end of basic-1 -->
   <!-- end of details -->
-
-
 
 
   <br><br>
@@ -132,6 +174,4 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}
-
-{% endblock javascripts %}
+{% block javascripts %} {% endblock javascripts %}

@@ -111,7 +111,7 @@
                   <span class="nav-item">
                       <a class="btn-outline-sm" href="tel:02128426052"> ۰۲۱ ۲۸۴۲۶۰۵۲ <i class="fas fa-phone"></i> </a>
                       {% if user.is_authenticated %}
-                      <a class="btn-outline-sm" href="{% url 'app:profile' %}"> پروفایل <i class="fas fa-user"></i> </a>
+                      <a class="btn-outline-sm" href="{% url 'app:profile' %}"> حساب کاربری <i class="fas fa-user"></i> </a>
                       {% else %}
                       <a class="btn-outline-sm" href="{% url 'app:login' %}"> ورود <i class="fas fa-user"></i> </a>
                       {% endif %}

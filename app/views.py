@@ -141,7 +141,7 @@ def about(request):
 
 
 #------------------------------------------------------------------------------
-
+@login_required(login_url="/login")
 def request(request):
     packages = models.Package.objects.all()
     msg = None
@@ -157,11 +157,13 @@ def request(request):
             if request.POST["discount"] in models.Discounts.objects.filter(active=True).values_list('code',flat=True):
                 discount = get_object_or_404(Discounts, code=request.POST['discount'])
                 package = get_object_or_404(Package, id=request.POST['package'])
-                req.final_price = package.price-(package.price*(discount.discount_percentage/100)) 
+                req.final_price = package.price-(package.price*(discount.discount_percentage/100))
             else:
+                package = get_object_or_404(Package, id=request.POST['package'])
                 req.final_price = package.price
             req.save()
-            return render(request, "checkout.html", { "msg":msg })
+            return redirect(req.get_absolute_url())
+            #return render(request, "checkout.html", { "msg":msg })
 
     return render(request, "request.html", { "packages":packages, "msg":msg })
 
@@ -235,6 +237,7 @@ def signup(request):
 #------------------------------------------------------------------------------
 def profile(request):
     profile = get_object_or_404(Profile, user=request.user)
+    user_reqs = models.Requests.objects.filter(user=request.user)
     msg = None
     if request.method == "POST":
         if len(request.POST["phone"]) != 11 :
@@ -261,7 +264,23 @@ def profile(request):
 
 
     html_template = loader.get_template( 'profile.html' )
-    return HttpResponse(html_template.render( { 'profile':profile , 'msg':msg }, request) )
+    return HttpResponse(html_template.render( { 'profile':profile, 'user_reqs':user_reqs, 'msg':msg }, request) )
+
+
+
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+def checkout(request, id):
+    req = get_object_or_404(Requests, id=id)
+    html_template = loader.get_template( 'checkout.html' )
+    return HttpResponse(html_template.render( {'req':req}, request) )
 
 
 

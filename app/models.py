@@ -94,9 +94,13 @@ class Requests(models.Model):
     discount = models.CharField(max_length=80, blank=True, null=True, verbose_name = "کد تخفیف")
     date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ درخواست")
     final_price = models.IntegerField(null=True, blank=True, verbose_name = "قیمت نهایی")
+    CHOICES = ( ('فعال','فعال'), ('لغو شده','لغو شده'), ('در انتظار پرداخت','در انتظار پرداخت'), ('در انتظار فعال سازی','در انتظار فعال سازی') )
+    status = models.CharField(max_length=40,choices=CHOICES, default='در انتظار پرداخت', verbose_name = "وضعیت")
     paid = models.BooleanField(default = False, verbose_name="پرداخت شده")
-    date_launched = jmodels.jDateTimeField(null=True, blank=True, verbose_name = "تاریخ راه اندازی")
+    date_launched = jmodels.jDateField(null=True, blank=True, verbose_name = "تاریخ راه اندازی")
 
+    def get_absolute_url(self):
+        return reverse('app:checkout',args=[self.id])
 
     class Meta:
         verbose_name = "درخواست"
