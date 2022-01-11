@@ -141,23 +141,28 @@ def about(request):
 
 
 #------------------------------------------------------------------------------
+
 def request(request):
     packages = models.Package.objects.all()
+    msg = None
     if request.method == "POST":
-        req = Requests()
-        req.fname = request.POST['fname']
-        req.lname = request.POST['lname']
-        req.phone = request.POST['phone']
-        req.package = get_object_or_404(Package, id=request.POST['package'])
-        req.domain = request.POST['domain']
-        req.discount = request.POST['discount']
-        req.save()
+        if request.POST["domain"] in models.Requests.objects.all().values_list('domain',flat=True):
+            msg = 'دامنه وارد شده قبلاً استفاده شده، لطفاً نام دیگری وارد کنید'
+        else:
+            req = Requests()
+            req.user = request.user
+            req.package = get_object_or_404(Package, id=request.POST['package'])
+            req.domain = request.POST['domain']
+            req.discount = request.POST['discount']
+            if request.POST["discount"] in models.Discounts.objects.filter(active=True).values_list('code',flat=True):
+                discount = get_object_or_404(Discounts, code=request.POST['discount'])
+                package = get_object_or_404(Package, id=request.POST['package'])
+                req.final_price = package.price * discount.discount_percentage
+            req.save()
+            return render(request, "checkout.html", { "msg":msg })
 
-        html_template = loader.get_template( 'checkout.html' )
-        return HttpResponse(html_template.render({}, request))
+    return render(request, "request.html", { "packages":packages, "msg":msg })
 
-    html_template = loader.get_template( 'request.html' )
-    return HttpResponse(html_template.render({'packages':packages}, request))
 
 
 
