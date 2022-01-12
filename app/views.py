@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import Profile, Discounts, Package, Requests, Contact
+from .models import Profile, Newsletter, Discounts, Package, Requests, Contact
 from .forms import ContactForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
@@ -20,8 +20,13 @@ from django.contrib.auth.models import User
 
 #------------------------------------------------------------------------------
 def index(request):
-    context = {}
-    return render(request, 'index.html', context)
+    if request.method == "POST":
+        newsletter = Newsletter()
+        newsletter.email = request.POST["email"]
+        newsletter.save()
+        return redirect("/#newsletter")
+
+    return render(request, 'index.html', {})
 
 
 
@@ -73,29 +78,6 @@ def search(request):
     return render(request, 'search.html', {'areas':areas })
 
 
-
-
-
-
-#------------------------------------------------------------------------------
-@login_required(login_url="/login/")
-def profile(request):
-    current_user = request.user
-    profile = models.Profile.objects.filter(user=request.user).first()
-    if request.method == 'POST':
-        current_user.username = request.POST['user']
-        current_user.first_name = request.POST['firstname']
-        current_user.last_name = request.POST['lastname']
-        profile.phone = request.POST['phone']
-        current_user.email = request.POST['email']
-        profile.additional_information = request.POST['additional_information']
-        if (request.FILES): profile.user_photo = request.FILES['photo']
-        current_user.save()
-        profile.save()
-        return HttpResponseRedirect('/profile')
-
-    context = {}
-    return render(request, 'accounts/profile.html', context)
 
 
 
@@ -236,6 +218,7 @@ def signup(request):
 
 
 #------------------------------------------------------------------------------
+@login_required(login_url='/login')
 def profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     user_reqs = models.Requests.objects.filter(user=request.user)
@@ -294,6 +277,7 @@ def password_change(request):
 
 
 #------------------------------------------------------------------------------
+@login_required(login_url='/login')
 def checkout(request, id):
     req = get_object_or_404(Requests, id=id)
     discounts = models.Discounts.objects.filter(active=True)

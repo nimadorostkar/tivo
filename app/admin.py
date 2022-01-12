@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Profile, Discounts, Package, Requests, Contact
+from .models import Profile, Newsletter, Discounts, Package, Requests, Contact
 from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin
 
@@ -21,6 +21,17 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone')
     search_fields = ('phone',)
 admin.site.register(Profile, ProfileAdmin)
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+class NewsletterAdmin(admin.ModelAdmin):
+    list_display = ('email', 'date_created')
+admin.site.register(Newsletter, NewsletterAdmin)
+
 
 
 

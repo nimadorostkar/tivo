@@ -547,21 +547,17 @@
                       <h2> در خبرنامه ما عضو شوید و از آخرین اخبار و اطلاعات ما با خبر شوید  </h2>
 
                       <!-- Newsletter Form -->
-                      <form id="newsletterForm" data-toggle="validator" data-focus="false">
+                      <form action="#" method="post" id="newsletter">
+                        {% csrf_token %}
                           <div class="form-group">
-                              <input type="email" class="form-control-input" id="nemail" required>
-                              <label class="label-control" for="nemail">Email</label>
-                              <div class="help-block with-errors"></div>
+                              <input type="email" name="email" class="form-control-input" id="email" required>
+                              <label class="label-control" for="email">ایمیل</label>
                           </div>
                           <div class="form-group checkbox" dir="rtl" align="right">
                               <input type="checkbox" id="nterms" value="Agreed-to-Terms" required> من <a href="privacy-policy.html"> حریم خصوصی </a> و <a href="terms-conditions.html"> شرایط و ضوابط </a> املاک اَپ را خوانده ام و موافقم.
-                              <div class="help-block with-errors"></div>
                           </div>
                           <div class="form-group">
                               <button type="submit" class="form-control-submit-button"> مشترک شوید </button>
-                          </div>
-                          <div class="form-message">
-                              <div id="nmsgSubmit" class="h3 text-center hidden"></div>
                           </div>
                       </form>
                       <!-- end of newsletter form -->

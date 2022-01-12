@@ -41,6 +41,14 @@ class Profile(models.Model):
 
 
 
+#------------------------------------------------------------------------------
+class Newsletter(models.Model):
+    email = models.EmailField(max_length = 254 , verbose_name="ایمیل")
+    date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ درخواست")
+
+    def __str__(self):
+        return str(self.email)
+
 
 
 
@@ -60,6 +68,9 @@ class Discounts(models.Model):
 
     def __str__(self):
         return str(self.code)
+
+
+
 
 
 
