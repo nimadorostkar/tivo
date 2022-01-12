@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} |  بررسی و نهایی کردن درخواست  {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %} {% endblock stylesheets %}
+
+{% block content %}
+
+
+
+<!-- Header -->
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>  بررسی و نهایی کردن درخواست  </h1>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</header> <!-- end of ex-header -->
+<!-- end of header -->
+
+
+<!-- Breadcrumbs -->
+<div class="ex-basic-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumbs" dir="rtl">
+                     بررسی و نهایی کردن درخواست  </a><i class="fa fa-angle-double-right"></i><span>  املاک اَپ  </span>
+                </div> <!-- end of breadcrumbs -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of ex-basic-1 -->
+<!-- end of breadcrumbs -->
+
+
+
+
+
+<!-- Description -->
+  <div class="cards-1">
+      <div class="container">
+
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="above-heading">
+                    <div class="card-image">
+                        <img class="img-fluid" src="{% static 'images/payment.png' %}" alt="alternative">
+                    </div>
+                  </div>
+                  <p class="p-heading" dir="rtl"> کاربر عزیز nima ، از اعتماد شما به مجموعه املاک اَپ سپاسگزاریم. امیدواریم که دستیار اختصاصی مشاوران املاک ما ابزاری برای توسعه کسب و کار شما باشد. </p>
+              </div> <!-- end of col -->
+          </div> <!-- end of row -->
+
+          <div class="row">
+              <div class="col-lg-12" dir="rtl">
+                  <!-- Card -->
+                  <div class="card">
+                      <div class="card-body">
+                          <h6 class="above-heading" for="phone"> بسته انتخابی </h6>
+                          <p>  ۱۵ روز استفاده رایگان </p>
+                      </div>
+                  </div>
+                  <!-- Card -->
+                  <div class="card">
+                      <div class="card-body">
+                          <h6 class="above-heading" for="phone"> دامنه انتخابی </h6>
+                          <p dir="ltr"> {{ req.domain }}.amlak.app </p>
+                      </div>
+                  </div>
+                  <!-- end of card -->
+                  <!-- Card -->
+                  <div class="card">
+                      <div class="card-body">
+                        <h6 class="above-heading" for="phone"> وضعیت درخواست</h6>
+                        <p> {{ req.status }} </p>
+                      </div>
+                  </div>
+                  <!-- end of card -->
+
+              </div> <!-- end of col -->
+          </div> <!-- end of row -->
+
+
+          <p dir="rtl" style="font-size:17px; color:grey;">  در سريع ترین زمان سرویس شما فعال سازی خواهد شد. و کارشناسان ما ۲۴ ساعته آماده پشتیبانی و پاسخگویی به سوالاتتان هستند. </p>
+
+
+
+      </div> <!-- end of container -->
+  </div> <!-- end of cards-1 -->
+  <!-- end of description -->
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %} {% endblock javascripts %}

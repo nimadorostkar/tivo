@@ -79,6 +79,15 @@
             <td> {% if userReq.status == 'فعال' %} <p> {{ userReq.date_launched|date:'Y,m,d' }} </p> {% endif %}</td>
           </tr>
           {% endfor %}
+          {% for userReq in user_demo_reqs %}
+          <tr>
+            <td dir="ltr"> <a style="color:#5f4ded; text-decoration:none;" href="http://www.{{ userReq.domain }}.amlak.app"> {{ userReq.domain }}.amlak.app </a></td>
+            <td><p> ۱۵ روز استفاده رایگان </p></td>
+            <td><p> {{ userReq.date_created|date:'Y,m,d' }} ({{ userReq.date_created|date:'H:i' }}) </p></td>
+            <td><p> {{ userReq.status }} </p> </td>
+            <td> {% if userReq.status == 'فعال' %} <p> {{ userReq.date_launched|date:'Y,m,d' }} </p> {% endif %}</td>
+          </tr>
+          {% endfor %}
         </table>
 
 

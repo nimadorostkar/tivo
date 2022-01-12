@@ -131,6 +131,33 @@ class Requests(models.Model):
 
 
 
+#------------------------------------------------------------------------------
+class Demo_req(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = "کاربر")
+    domain = models.CharField(max_length=80, unique=True, verbose_name="نام دامنه")
+    date_created = jmodels.jDateTimeField(auto_now_add=True, verbose_name = "تاریخ درخواست")
+    CHOICES = ( ('فعال','فعال'), ('لغو شده','لغو شده'), ('در انتظار فعال سازی','در انتظار فعال سازی'), ('منقضی شدن اعتبار','منقضی شدن اعتبار') )
+    status = models.CharField(max_length=40,choices=CHOICES, default='در انتظار فعال سازی', verbose_name = "وضعیت")
+    date_launched = jmodels.jDateField(null=True, blank=True, verbose_name = "تاریخ راه اندازی")
+
+    def get_absolute_url(self):
+        return reverse('app:demo_checkout',args=[self.id])
+
+    class Meta:
+        verbose_name = "درخواست دمو"
+        verbose_name_plural = "درخواست های دمو"
+
+    def __str__(self):
+        return str(self.user) + " | دمو ۱۵ روزه "
+
+
+
+
+
+
+
+
+
 
 
 #------------------------------------------------------------------------------

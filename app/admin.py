@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
 from django.contrib.admin.models import LogEntry
-from .models import Profile, Newsletter, Discounts, Package, Requests, Contact
+from .models import Profile, Newsletter, Discounts, Package, Requests, Demo_req, Contact
 from jalali_date import datetime2jalali, date2jalali
 from jalali_date.admin import ModelAdminJalaliMixin, StackedInlineJalaliMixin, TabularInlineJalaliMixin
 
@@ -65,6 +65,21 @@ class RequestsAdmin(ModelAdminJalaliMixin,admin.ModelAdmin):
     list_filter = ('package','date_created', 'paid', 'status')
     search_fields = ('user', 'domain')
 admin.site.register(Requests, RequestsAdmin)
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------
+class Demo_reqAdmin(ModelAdminJalaliMixin,admin.ModelAdmin):
+    list_display = ('domain', 'user', 'date_created', 'status')
+    list_filter = ('user','date_created', 'status')
+    search_fields = ('user', 'domain')
+admin.site.register(Demo_req, Demo_reqAdmin)
+
 
 
 

@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django import template
 from . import models
-from .models import Profile, Newsletter, Discounts, Package, Requests, Contact
+from .models import Profile, Newsletter, Discounts, Package, Requests, Demo_req, Contact
 from .forms import ContactForm
 from django.db.models import Count, Max, Min, Avg, Q
 from itertools import chain
@@ -157,6 +157,31 @@ def request(request):
 
 
 
+#-----------------------------------------------------------------------------
+@login_required(login_url="/login")
+def demo(request):
+    msg = None
+    if request.method == "POST":
+        req_doman = models.Requests.objects.all().values_list('domain',flat=True)
+        demo_domain = models.Demo_req.objects.all().values_list('domain',flat=True)
+        domains = list(chain(req_doman , demo_domain))
+        if request.POST["domain"] in domains:
+            msg = 'دامنه وارد شده قبلاً استفاده شده، لطفاً نام دیگری وارد کنید'
+        else:
+            req = Demo_req()
+            req.user = request.user
+            req.domain = request.POST['domain']
+            req.save()
+            return redirect(req.get_absolute_url())
+
+    return render(request, "demo.html", { "msg":msg })
+
+
+
+
+
+
+
 
 
 #------------------------------------------------------------------------------
@@ -222,6 +247,7 @@ def signup(request):
 def profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     user_reqs = models.Requests.objects.filter(user=request.user)
+    user_demo_reqs = models.Demo_req.objects.filter(user=request.user)
     msg = None
     if request.method == "POST":
         if len(request.POST["phone"]) != 11 :
@@ -244,7 +270,7 @@ def profile(request):
 
 
     html_template = loader.get_template( 'profile.html' )
-    return HttpResponse(html_template.render( { 'profile':profile, 'user_reqs':user_reqs, 'msg':msg }, request) )
+    return HttpResponse(html_template.render( { 'profile':profile, 'user_reqs':user_reqs, 'user_demo_reqs':user_demo_reqs, 'msg':msg }, request) )
 
 
 
@@ -286,6 +312,16 @@ def checkout(request, id):
 
 
 
+
+
+
+
+#------------------------------------------------------------------------------
+@login_required(login_url='/login')
+def demo_checkout(request, id):
+    req = get_object_or_404(Demo_req, id=id)
+    html_template = loader.get_template( 'demo_checkout.html' )
+    return HttpResponse(html_template.render( { 'req':req }, request) )
 
 
 
