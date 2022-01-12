@@ -406,7 +406,9 @@
                           <div class="frequency" dir="rtl"> سه ماهه </div>
                           <div class="divider"></div>
                           <div class="button-wrapper">
-                              <a class="btn-solid-reg page-scroll" href="{% url 'app:request' %}"> ثبت سفارش </a>
+                            <div class="card-image">
+                                <img class="img-price" src="{% static 'images/3.png' %}" alt="alternative">
+                            </div>
                           </div>
                       </div>
                   </div> <!-- end of card -->
@@ -420,7 +422,9 @@
                           <div class="frequency"> شش ماهه  </div>
                           <div class="divider"></div>
                           <div class="button-wrapper">
-                              <a class="btn-solid-reg page-scroll" href="{% url 'app:request' %}"> ثبت سفارش </a>
+                            <div class="card-image">
+                                <img class="img-price" src="{% static 'images/6.png' %}" alt="alternative">
+                            </div>
                           </div>
                       </div>
                   </div> <!-- end of card -->
@@ -428,16 +432,15 @@
 
                   <!-- Card-->
                   <div class="card">
-                      <!--<div class="label">
-                          <p class="best-value">Best Value</p>
-                      </div> -->
                       <div class="card-body">
                           <div class="card-title"> طلایی </div>
                           <div class="price" dir="rtl"><span class="value" style="font-size: 3rem;"> ۱,۶۰۰,۰۰۰ </span><span class="currency">تومان</span></div>
                           <div class="frequency"> یک ساله </div>
                           <div class="divider"></div>
                           <div class="button-wrapper">
-                              <a class="btn-solid-reg page-scroll" href="{% url 'app:request' %}"> ثبت سفارش </a>
+                            <div class="card-image">
+                                <img class="img-price" src="{% static 'images/1.png' %}" alt="alternative">
+                            </div>
                           </div>
                       </div>
                   </div> <!-- end of card -->
@@ -445,6 +448,15 @@
 
               </div> <!-- end of col -->
           </div> <!-- end of row -->
+
+
+          <div dir="rtl">
+            <a class="btn-solid-lg page-scroll" href="{% url 'app:request' %}"> ثبت درخواست </a>
+            <a class="btn-solid-lg page-scroll" href="{% url 'app:demo' %}"> ۱۵ روز استفاده رایگان </a>
+          </div>
+
+
+
       </div> <!-- end of container -->
   </div> <!-- end of cards-2 -->
   <!-- end of pricing -->
