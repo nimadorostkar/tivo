@@ -93,15 +93,15 @@
                       <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle page-scroll" href="#video" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false"> سایر صفحات </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="article-details.html"><span class="item-text"> نحوه استفاده  </span></a>
+                              <a class="dropdown-item" href="#"><span class="item-text"> نحوه استفاده  </span></a>
                               <div class="dropdown-items-divide-hr"></div>
-                              <a class="dropdown-item" href="terms-conditions.html"><span class="item-text">  درباره ما </span></a>
+                              <a class="dropdown-item" href="{% url 'app:about' %}"><span class="item-text">  درباره ما </span></a>
                               <div class="dropdown-items-divide-hr"></div>
-                              <a class="dropdown-item" href="privacy-policy.html"><span class="item-text"> شرایط و ضوابط </span></a>
+                              <a class="dropdown-item" href="#"><span class="item-text"> شرایط و ضوابط </span></a>
                               <div class="dropdown-items-divide-hr"></div>
-                              <a class="dropdown-item" href="privacy-policy.html"><span class="item-text">  فرصت های شغلی </span></a>
+                              <a class="dropdown-item" href="#"><span class="item-text">  فرصت های شغلی </span></a>
                               <div class="dropdown-items-divide-hr"></div>
-                              <a class="dropdown-item" href="privacy-policy.html"><span class="item-text">  سوالات متداول </span></a>
+                              <a class="dropdown-item" href="#"><span class="item-text">  سوالات متداول </span></a>
                           </div>
                       </li>
                       <!-- end of dropdown menu -->
@@ -109,7 +109,7 @@
 
                   </ul>
                   <span class="nav-item">
-                      <a class="btn-outline-sm" href="tel:02128426052"> ۰۲۱ ۲۸۴۲۶۰۵۲ <i class="fas fa-phone"></i> </a>
+                      <a class="btn-outline-sm" href="tel:02171057446"> ۰۲۱ ۷۱۰۵۷۴۴۶ <i class="fas fa-phone"></i> </a>
                       {% if user.is_authenticated %}
                       <a class="btn-outline-sm" href="{% url 'app:profile' %}"> حساب کاربری <i class="fas fa-user"></i> </a>
                       {% else %}
@@ -151,31 +151,31 @@
                         <ul class="list-unstyled li-space-lg p-small">
                             <li class="media">
                                 <i class="fas fa-square"></i> &nbsp;&nbsp;
-                                <div class="media-body">  <a class="white" href="#your-link" style="color:white;text-decoration: none;"> ثبت سفارش </a> </div>
+                                <div class="media-body">  <a class="white" href="{% url 'app:request' %}" style="color:white;text-decoration: none;"> ثبت سفارش </a> </div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i> &nbsp;&nbsp;
-                                <div class="media-body"> <a class="white" href="terms-conditions.html" style="color:white;text-decoration: none;"> امکانات و قابلیت ها </a> </div>
+                                <div class="media-body"> <a class="white" href="{% url 'app:home' %}#features" style="color:white;text-decoration: none;"> امکانات و قابلیت ها </a> </div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i> &nbsp;&nbsp;
-                                <div class="media-body"> <a class="white" href="terms-conditions.html" style="color:white;text-decoration: none;"> تعرفه ها و پکیج های موجود </a> </div>
+                                <div class="media-body"> <a class="white" href="{% url 'app:home' %}#pricing" style="color:white;text-decoration: none;"> تعرفه ها و پکیج های موجود </a> </div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i> &nbsp;&nbsp;
-                                <div class="media-body"> <a class="white" href="terms-conditions.html" style="color:white;text-decoration: none;"> درباره ما </a> </div>
+                                <div class="media-body"> <a class="white" href="{% url 'app:about' %}" style="color:white;text-decoration: none;"> درباره ما </a> </div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i> &nbsp;&nbsp;
-                                <div class="media-body"> <a class="white" href="terms-conditions.html" style="color:white;text-decoration: none;"> شرایط و ضوابط </a> </div>
+                                <div class="media-body"> <a class="white" href="#" style="color:white;text-decoration: none;"> شرایط و ضوابط </a> </div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i> &nbsp;&nbsp;
-                                <div class="media-body"> <a class="white" href="terms-conditions.html" style="color:white;text-decoration: none;"> نحوه استفاده </a> </div>
+                                <div class="media-body"> <a class="white" href="#" style="color:white;text-decoration: none;"> نحوه استفاده </a> </div>
                             </li>
                             <li class="media">
                                 <i class="fas fa-square"></i> &nbsp;&nbsp;
-                                <div class="media-body"> <a class="white" href="terms-conditions.html" style="color:white;text-decoration: none;"> پشتیبانی </a> </div>
+                                <div class="media-body"> <a class="white" href="{% url 'app:contact' %}" style="color:white;text-decoration: none;"> پشتیبانی </a> </div>
                             </li>
                         </ul>
                     </div>
@@ -186,7 +186,11 @@
                         <ul class="list-unstyled li-space-lg p-small">
                             <li class="media">
                                 <i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp;
-                                <div class="media-body"> تهران ، پیروزی تقاطع نبرد شمالی و پاسدار گمنام </div>
+                                <div class="media-body"> تهران ، پیروزی - تقاطع نبرد شمالی و پاسدار گمنام </div>
+                            </li>
+                            <li class="media">
+                                <i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp;
+                                <div class="media-body"> تهران ، سهرودی جنوبی - نبش کوچه امین زاده  </div>
                             </li>
                             <li class="media">
                                 <div class="media-body">
@@ -194,7 +198,8 @@
                                   &nbsp; <i class="fas fa-envelope"></i> &nbsp; <a class="white" style="color:white;text-decoration: none;" href="mailto:contact@amlak.app"> contact@amlak.app</a> <br>
                                   <i class="fas fa-globe"></i>  <a class="white" style="color:white;text-decoration: none;" href="https://www.amlak.app"> Amlak.App</a> <br>
                                   <i class="fas fa-globe"></i>  <a class="white" style="color:white;text-decoration: none;" href="http://www.Atrotech.ir"> Atrotech.ir</a> <br>
-                                  &nbsp; <i class="fas fa-phone"></i> &nbsp; <a dir="ltr" class="white" style="color:white;text-decoration: none;" href="tel:02128426052"> ۰۲۱ ۲۸۴۲۶۰۵۲  </a>
+                                  &nbsp; <i class="fas fa-phone"></i> &nbsp; <a dir="ltr" class="white" style="color:white;text-decoration: none;" href="tel:02171057446"> ۰۲۱ ۷۱۰۵۷۴۴۶ </a>
+                                  &nbsp;&nbsp; <a dir="ltr" class="white" style="color:white;text-decoration: none;" href="tel:02128426052"> ۰۲۱ ۲۸۴۲۶۰۵۲  </a>
                                 </div>
                             </li>
                             <li class="media"><br>
